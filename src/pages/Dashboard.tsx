@@ -21,7 +21,6 @@ import {
   MonitorPlay,
   ArrowRight,
 } from 'lucide-react';
-import { h3 } from 'framer-motion/client';
 
 
 // ---------- Types ----------
