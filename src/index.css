@@ -7,7 +7,11 @@
   --z-dropdown: 200;
   --z-overlay: 900;
   --z-modal: 1000;
-  --color-forest-green: #228B22;  /* Placeholder for potential theme colors */
+  /* PrepForge brand colors */
+  --color-brand-primary: #10b981;   /* emerald-500 */
+  --color-brand-dark:    #059669;   /* emerald-600 */
+  --color-brand-slate:   #334155;   /* slate-700   */
+
 }
 
 @layer base {
