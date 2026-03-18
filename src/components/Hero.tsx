@@ -6,13 +6,11 @@ export const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative overflow-hidden bg-slate-50 pt-24 pb-32 lg:pt-36 lg:pb-40 z-base transition-colors duration-300">
+    <div className="relative overflow-hidden bg-slate-50 pt-32 pb-40 lg:pt-48 lg:pb-56 z-base transition-colors duration-300">
 
-      {/* Background decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full overflow-hidden -z-10 mt-10 pointer-events-none">
-        <div className="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-emerald-200/30 blur-3xl opacity-60" />
-        <div className="absolute top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-teal-100/40 blur-3xl opacity-60" />
-      </div>
+      {/* Decorative blobs */}
+      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-green-100/50 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center max-w-4xl mx-auto">
@@ -22,10 +20,10 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 text-sm font-semibold mb-8 border border-emerald-200 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-100 text-green-700 text-xs sm:text-sm font-bold mb-10 border border-green-200 shadow-sm"
           >
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            Elevate Your Coding Journey
+            <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+            PrepForge platform is now live!
           </motion.div>
 
           {/* Headline */}
@@ -33,17 +31,13 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight"
           >
             From{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-500">
               Beginner
             </span>{' '}
-            to
-            <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-900">
-              Job Ready
-            </span>
+            to Job Ready
           </motion.h1>
 
           {/* Subtext */}
@@ -51,10 +45,9 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed"
+            className="text-base md:text-xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            Master data structures, conquer algorithms, and ace your technical interviews
-            with our structured roadmap and AI-powered mentorship.
+            The only platform you need to master coding, build real-world projects, and ace your technical interviews.
           </motion.p>
 
           {/* CTAs */}
@@ -64,36 +57,37 @@ export const Hero = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row justify-center items-center gap-4"
           >
-            {/* Primary — Emerald */}
             <button
-              onClick={() => navigate('/explore')}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold text-lg hover:from-emerald-500 hover:to-teal-500 hover:shadow-lg hover:shadow-emerald-200 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 group"
+              onClick={() => navigate('/roadmaps')}
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-green-600 text-white font-bold text-base hover:bg-green-700 hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 group shadow-sm shadow-green-200"
             >
               Start Your Journey
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-
-            {/* Secondary — Slate outline */}
-            <button className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-slate-700 font-semibold text-lg border border-slate-200 hover:bg-slate-50 hover:border-slate-300 hover:shadow-md transition-all">
-              View Curriculum
+            <button
+              onClick={() => navigate('/explore')}
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-slate-900 font-bold text-base border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all shadow-sm"
+            >
+              Explore Roadmaps
             </button>
           </motion.div>
 
-          {/* Social proof strip */}
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500 font-medium"
+            className="mt-20 pt-10 border-t border-slate-200 flex flex-wrap justify-center gap-12"
           >
             {[
-              { emoji: '👩‍💻', text: '10,000+ students' },
-              { emoji: '🏢', text: '500+ companies' },
-              { emoji: '⭐', text: '4.9 / 5 rating' },
-            ].map((item) => (
-              <span key={item.text} className="flex items-center gap-1.5">
-                <span>{item.emoji}</span> {item.text}
-              </span>
+              { label: 'Curated Roadmaps', value: '50+' },
+              { label: 'Active Students', value: '10k+' },
+              { label: 'Success Rate', value: '94%' },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-3xl font-extrabold text-slate-900 mb-1">{stat.value}</p>
+                <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">{stat.label}</p>
+              </div>
             ))}
           </motion.div>
         </div>

@@ -135,9 +135,9 @@ const timelineSteps: Step[] = [
 ];
 
 const statusCfg = {
-  completed:   { badge: 'bg-emerald-100 text-emerald-700 border-emerald-200', ring: 'ring-emerald-300', dot: 'bg-emerald-500', line: 'bg-emerald-400', cardBorder: 'border-emerald-600/30', icon: <CheckCircle2 className="w-4 h-4 text-emerald-400" />, label: 'Completed',   btnGrad: 'from-emerald-500 to-teal-500',   btnText: 'Review Materials'     },
-  'in-progress': { badge: 'bg-blue-100 text-blue-700 border-blue-200',       ring: 'ring-blue-400',    dot: 'bg-blue-400 animate-pulse', line: 'bg-slate-700', cardBorder: 'border-blue-500/40',    icon: <Zap className="w-4 h-4 text-blue-400" />,           label: 'In Progress', btnGrad: 'from-blue-500 to-indigo-500',    btnText: 'Continue Learning'    },
-  upcoming:    { badge: 'bg-slate-700 text-slate-300 border-slate-600',       ring: 'ring-slate-600',   dot: 'bg-slate-600',              line: 'bg-slate-700', cardBorder: 'border-slate-700',       icon: <Circle className="w-4 h-4 text-slate-600" />,       label: 'Upcoming',    btnGrad: 'from-slate-600 to-slate-500',    btnText: 'Unlock Step'          },
+  completed:   { badge: 'bg-green-100 text-green-700 border-green-200', ring: 'ring-green-100', dot: 'bg-green-500', line: 'bg-green-200', cardBorder: 'border-green-200', icon: <CheckCircle2 className="w-4 h-4 text-green-500" />, label: 'Completed',   btnGrad: 'from-green-500 to-green-600',   btnText: 'Review Materials'     },
+  'in-progress': { badge: 'bg-blue-100 text-blue-700 border-blue-200',       ring: 'ring-blue-100',    dot: 'bg-blue-400 animate-pulse', line: 'bg-slate-200', cardBorder: 'border-blue-200',    icon: <Zap className="w-4 h-4 text-blue-500" />,           label: 'In Progress', btnGrad: 'from-blue-500 to-indigo-500',    btnText: 'Continue Learning'    },
+  upcoming:    { badge: 'bg-slate-100 text-slate-500 border-slate-200',       ring: 'ring-slate-100',   dot: 'bg-slate-300',              line: 'bg-slate-200', cardBorder: 'border-slate-100',       icon: <Circle className="w-4 h-4 text-slate-400" />,       label: 'Upcoming',    btnGrad: 'from-slate-600 to-slate-500',    btnText: 'Unlock Step'          },
 };
 
 // ─── Toast ────────────────────────────────────────────────────────────────────
@@ -179,19 +179,19 @@ const DirCard = ({ card, onClick }: { card: RoadmapCard; onClick: () => void }) 
   <motion.button
     whileHover={{ y: -3, transition: { duration: 0.18 } }}
     onClick={onClick}
-    className="group w-full text-left bg-slate-800/60 hover:bg-slate-700/80 border border-slate-700 hover:border-slate-500 rounded-2xl px-5 py-4 flex items-center justify-between gap-3 transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-black/20"
+    className="group w-full text-left bg-white hover:bg-slate-50 border border-slate-200 hover:border-green-300 rounded-2xl px-5 py-4 flex items-center justify-between gap-3 transition-all duration-200 shadow-sm hover:shadow-md"
   >
     <div className="flex items-center gap-3 min-w-0">
-      <span className="text-sm font-semibold text-slate-200 group-hover:text-white transition truncate">
+      <span className="text-sm font-semibold text-slate-700 group-hover:text-slate-950 transition truncate">
         {card.title}
       </span>
       {card.tag && (
-        <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">
+        <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-green-100 text-green-700 border border-green-200 text-[10px] font-bold">
           {card.tag}
         </span>
       )}
     </div>
-    <Bookmark className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 flex-shrink-0 transition-colors" />
+    <Bookmark className="w-4 h-4 text-slate-400 group-hover:text-green-600 flex-shrink-0 transition-colors" />
   </motion.button>
 );
 
@@ -228,8 +228,8 @@ export const Roadmaps = () => {
         onClose={() => setToast({ show: false, title: '' })}
       />
 
-      {/* ── Outer dark shell ── */}
-      <div className="min-h-screen bg-slate-900">
+      {/* ── Outer light shell ── */}
+      <div className="min-h-screen bg-white">
 
         {/* ══════════ DIRECTORY VIEW ══════════ */}
         <AnimatePresence mode="wait">
@@ -242,31 +242,31 @@ export const Roadmaps = () => {
               transition={{ duration: 0.3 }}
             >
               {/* Hero */}
-              <div className="relative bg-slate-900 border-b border-slate-800 overflow-hidden">
+              <div className="relative bg-white border-b border-slate-100 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl" />
-                  <div className="absolute bottom-0 -left-20 w-64 h-64 rounded-full bg-blue-500/10 blur-3xl" />
+                  <div className="absolute -top-32 -right-32 w-80 h-80 rounded-full bg-green-50 blur-3xl" />
+                  <div className="absolute bottom-0 -left-20 w-64 h-64 rounded-full bg-blue-50 blur-3xl" />
                 </div>
 
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 relative">
                   <button
                     onClick={() => navigate(-1)}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-400 transition mb-8"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-400 hover:text-green-600 transition mb-8"
                   >
                     <ChevronLeft className="w-4 h-4" /> Back
                   </button>
 
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 mb-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 text-green-400 text-xs font-bold border border-green-500/20 mb-5">
                     <Map className="w-3.5 h-3.5" /> Roadmaps
                   </div>
 
-                  <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-3">
+                  <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
                     Pick Your{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-500">
                       Learning Path
                     </span>
                   </h1>
-                  <p className="text-slate-400 text-base max-w-xl leading-relaxed">
+                  <p className="text-slate-600 text-base max-w-xl leading-relaxed">
                     Community-curated roadmaps, articles, and resources to help you choose your path and grow in your career.
                   </p>
                 </div>
@@ -293,7 +293,7 @@ export const Roadmaps = () => {
                 </section>
 
                 {/* Divider */}
-                <div className="border-t border-slate-800" />
+                <div className="border-t border-slate-100" />
 
                 {/* Skill-based */}
                 <section>
@@ -324,34 +324,34 @@ export const Roadmaps = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 30 }}
               transition={{ duration: 0.32 }}
-              className="bg-slate-900 min-h-screen"
+              className="bg-slate-50 min-h-screen"
             >
               {/* Timeline header */}
-              <div className="relative border-b border-slate-800 overflow-hidden">
+              <div className="relative border-b border-slate-200 bg-white overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl" />
+                  <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-green-50 blur-3xl" />
                 </div>
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
                   {/* Back to directory */}
                   <button
                     onClick={() => { setActiveTrack(null); setExpanded(2); }}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-400 hover:text-emerald-400 transition mb-8"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-green-600 transition mb-8"
                   >
                     <ChevronLeft className="w-4 h-4" /> All Roadmaps
                   </button>
 
                   <div className="flex flex-col md:flex-row md:items-end gap-7">
                     <div className="flex-1">
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 mb-4">
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold border border-green-200 mb-4">
                         <Map className="w-3 h-3" /> Career Roadmap
                       </div>
-                      <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight mb-3">
+                      <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
                         Full-Stack{' '}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-500">
                           Java Developer
                         </span>
                       </h1>
-                      <p className="text-slate-400 text-sm leading-relaxed max-w-lg">
+                      <p className="text-slate-600 text-sm leading-relaxed max-w-lg">
                         A beginner-to-hired structured path covering Java, React, SQL, Spring Boot, and cloud deployment.
                       </p>
                       <div className="flex flex-wrap gap-2 mt-4">
@@ -360,7 +360,7 @@ export const Roadmaps = () => {
                           { icon: <BookOpen className="w-3 h-3" />, text: '71 Resources' },
                           { icon: <Star className="w-3 h-3" />, text: '4.8 / 5' },
                         ].map((m) => (
-                          <span key={m.text} className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700">
+                          <span key={m.text} className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white text-slate-600 text-xs font-semibold border border-slate-200">
                             {m.icon} {m.text}
                           </span>
                         ))}
@@ -368,11 +368,11 @@ export const Roadmaps = () => {
                     </div>
 
                     {/* Mini progress ring */}
-                    <div className="flex-shrink-0 bg-slate-800 border border-slate-700 rounded-2xl p-5 text-center min-w-[160px]">
-                      <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-3">Progress</p>
+                    <div className="flex-shrink-0 bg-white border border-slate-200 rounded-2xl p-5 text-center min-w-[160px] shadow-sm">
+                      <p className="text-[10px] font-bold text-green-600 uppercase tracking-wider mb-3">Progress</p>
                       <div className="relative w-20 h-20 mx-auto mb-2">
                         <svg viewBox="0 0 100 100" className="w-20 h-20 -rotate-90">
-                          <circle cx="50" cy="50" r="38" stroke="#1e293b" strokeWidth="10" fill="none" />
+                          <circle cx="50" cy="50" r="38" stroke="#f1f5f9" strokeWidth="10" fill="none" />
                           <motion.circle
                             cx="50" cy="50" r="38"
                             stroke="url(#tl-grad)"
@@ -385,16 +385,16 @@ export const Roadmaps = () => {
                           />
                           <defs>
                             <linearGradient id="tl-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" stopColor="#10b981" />
-                              <stop offset="100%" stopColor="#14b8a6" />
+                              <stop offset="0%" stopColor="#22c55e" />
+                              <stop offset="100%" stopColor="#16a34a" />
                             </linearGradient>
                           </defs>
                         </svg>
-                        <span className="absolute inset-0 flex items-center justify-center text-xl font-extrabold text-white">
+                        <span className="absolute inset-0 flex items-center justify-center text-xl font-extrabold text-slate-900">
                           {progressPct}%
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400 font-semibold">{completedCount}/{timelineSteps.length} steps</p>
+                      <p className="text-xs text-slate-500 font-semibold">{completedCount}/{timelineSteps.length} steps</p>
                     </div>
                   </div>
                 </div>
@@ -416,7 +416,7 @@ export const Roadmaps = () => {
                           animate={{ scale: 1 }}
                           transition={{ duration: 0.3, delay: i * 0.08 }}
                           className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ring-4 ${cfg.ring} ${
-                            step.status === 'completed' ? 'bg-emerald-500' :
+                            step.status === 'completed' ? 'bg-green-500' :
                             step.status === 'in-progress' ? 'bg-blue-500' : 'bg-slate-700'
                           }`}
                         >
@@ -430,21 +430,21 @@ export const Roadmaps = () => {
                         initial={{ opacity: 0, x: 16 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: i * 0.09 }}
-                        className={`flex-1 mb-5 rounded-2xl border ${cfg.cardBorder} bg-slate-800/70 hover:bg-slate-800 cursor-pointer transition-colors duration-200 overflow-hidden`}
+                        className={`flex-1 mb-5 rounded-2xl border ${cfg.cardBorder} bg-white hover:bg-slate-50 cursor-pointer transition-colors duration-200 overflow-hidden shadow-sm hover:shadow-md`}
                         onClick={() => setExpanded(isOpen ? null : step.id)}
                       >
                         {/* Card top */}
                         <div className="p-5 flex items-start gap-4">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                            step.status === 'completed'   ? 'bg-emerald-500/20 text-emerald-400' :
-                            step.status === 'in-progress' ? 'bg-blue-500/20 text-blue-400' :
-                                                            'bg-slate-700 text-slate-500'
+                            step.status === 'completed'   ? 'bg-green-100 text-green-600' :
+                            step.status === 'in-progress' ? 'bg-blue-100 text-blue-600' :
+                                                            'bg-slate-100 text-slate-400'
                           }`}>
                             {step.icon}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <h3 className="text-sm font-bold text-white">{step.title}</h3>
+                              <h3 className="text-sm font-bold text-slate-900">{step.title}</h3>
                               <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${cfg.badge}`}>
                                 {cfg.icon} {cfg.label}
                               </span>
@@ -464,12 +464,12 @@ export const Roadmaps = () => {
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             transition={{ duration: 0.25 }}
-                            className="border-t border-slate-700 px-5 pb-5 pt-4"
+                            className="border-t border-slate-100 px-5 pb-5 pt-4"
                           >
-                            <p className="text-sm text-slate-400 leading-relaxed mb-4">{step.description}</p>
+                            <p className="text-sm text-slate-600 leading-relaxed mb-4">{step.description}</p>
                             <div className="flex flex-wrap gap-2 mb-5">
                               {step.topics.map((t) => (
-                                <span key={t} className="px-2.5 py-1 rounded-lg bg-slate-700 text-slate-300 text-[11px] font-semibold border border-slate-600 hover:bg-slate-600 transition cursor-pointer">
+                                <span key={t} className="px-2.5 py-1 rounded-lg bg-slate-50 text-slate-600 text-[11px] font-semibold border border-slate-200 hover:bg-slate-100 transition cursor-pointer">
                                   {t}
                                 </span>
                               ))}

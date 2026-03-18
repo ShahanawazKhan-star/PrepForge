@@ -29,10 +29,10 @@ const features = [
     description:
       'Follow expertly crafted, step-by-step learning paths tailored to your target role — SDE, Data Scientist, DevOps, and more.',
     icon: <Map className="w-7 h-7" />,
-    gradient: 'from-emerald-500 to-teal-500',
-    lightBg: 'bg-emerald-50',
-    lightText: 'text-emerald-700',
-    borderHover: 'hover:border-emerald-300',
+    gradient: 'from-green-500 to-green-600',
+    lightBg: 'bg-green-50',
+    lightText: 'text-green-700',
+    borderHover: 'hover:border-green-300',
     cta: 'Explore Roadmaps',
     path: '/roadmaps',
   },
@@ -150,7 +150,7 @@ const AuthToast = ({ show, onClose, onLogin }: ToastProps) => (
             <div className="flex items-center gap-2 mt-3">
               <button
                 onClick={onLogin}
-                className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-bold hover:opacity-90 transition shadow"
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-gradient-to-r from-green-600 to-green-700 text-white text-xs font-bold hover:opacity-90 transition shadow"
               >
                 <LogIn className="w-3 h-3" /> Sign In Now
               </button>
@@ -178,7 +178,7 @@ const AuthToast = ({ show, onClose, onLogin }: ToastProps) => (
           animate={{ scaleX: 0 }}
           transition={{ duration: 4, ease: 'linear' }}
           style={{ originX: 0 }}
-          className="h-1 bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full mt-1.5 mx-1"
+          className="h-1 bg-gradient-to-r from-green-500 to-green-400 rounded-full mt-1.5 mx-1"
         />
       </motion.div>
     )}
@@ -244,7 +244,7 @@ export const Explore = () => {
         <div className="relative overflow-hidden bg-white border-b border-slate-100">
           {/* Background blobs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-emerald-100/60 blur-3xl" />
+            <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-green-100/60 blur-3xl" />
             <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-blue-100/50 blur-3xl" />
           </div>
 
@@ -252,7 +252,7 @@ export const Explore = () => {
             {/* Back link */}
             <button
               onClick={() => navigate('/')}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-emerald-600 transition mb-8"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-green-600 transition mb-8"
             >
               <ChevronLeft className="w-4 h-4" /> Back to Home
             </button>
@@ -263,9 +263,9 @@ export const Explore = () => {
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 text-sm font-semibold mb-6 border border-emerald-200 shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-800 text-sm font-semibold mb-6 border border-green-200 shadow-sm"
               >
-                <Sparkles className="w-4 h-4 text-emerald-600" />
+                <Sparkles className="w-4 h-4 text-green-600" />
                 Everything you need to get hired
               </motion.div>
 
@@ -276,7 +276,7 @@ export const Explore = () => {
                 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-5"
               >
                 Explore{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-500">
                   PrepForge
                 </span>
               </motion.h1>

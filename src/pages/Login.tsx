@@ -26,8 +26,8 @@ export const Login = () => {
         
         {/* Decorative background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-          <div className="absolute -top-[10%] -right-[5%] w-[50%] h-[50%] rounded-full bg-emerald-200/20 blur-3xl opacity-50 dark:opacity-20"></div>
-          <div className="absolute top-[20%] -left-[10%] w-[40%] h-[40%] rounded-full bg-blue-200/20 blur-3xl opacity-50 dark:opacity-20"></div>
+          <div className="absolute -top-[10%] -right-[5%] w-[50%] h-[50%] rounded-full bg-green-200/20 blur-3xl"></div>
+          <div className="absolute top-[20%] -left-[10%] w-[40%] h-[40%] rounded-full bg-blue-200/20 blur-3xl"></div>
         </div>
 
         <motion.div 
@@ -37,19 +37,19 @@ export const Login = () => {
           className="max-w-md w-full"
         >
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Welcome back to <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">PrepForge</span>
+            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+              Welcome back to <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-500">PrepForge</span>
             </h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            <p className="mt-2 text-sm text-slate-600">
               Continue your journey to landing your dream tech job.
             </p>
           </div>
 
-          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8 z-base">
+          <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-200 p-8 z-base">
             <form onSubmit={handleSubmit} className="space-y-6">
               
               <div>
-                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" htmlFor="email">
+                <label className="block text-xs font-medium text-slate-700 mb-2" htmlFor="email">
                   Email Address
                 </label>
                 <div className="relative">
@@ -62,14 +62,14 @@ export const Login = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full text-sm pl-10 pr-3 py-2.5 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                    className="block w-full text-sm pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                     placeholder="you@example.com"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" htmlFor="password">
+                <label className="block text-xs font-medium text-slate-700 mb-2" htmlFor="password">
                   Password
                 </label>
                 <div className="relative">
@@ -82,12 +82,12 @@ export const Login = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full text-sm pl-10 pr-3 py-2.5 border border-slate-300 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                    className="block w-full text-sm pl-10 pr-3 py-2.5 border border-slate-300 rounded-xl bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                     placeholder="••••••••"
                   />
                 </div>
                 <div className="flex justify-end mt-2">
-                  <a href="#" className="text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-500">
+                  <a href="#" className="text-xs font-medium text-green-600 hover:text-green-500">
                     Forgot your password?
                   </a>
                 </div>
@@ -96,7 +96,7 @@ export const Login = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center items-center gap-2 py-2.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-slate-900 dark:bg-emerald-600 hover:bg-slate-800 dark:hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all disabled:opacity-70 disabled:cursor-not-allowed group"
+                className="w-full flex justify-center items-center gap-2 py-2.5 px-4 border border-transparent rounded-xl shadow-sm text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all disabled:opacity-70 disabled:cursor-not-allowed group"
               >
                 {isLoading ? (
                   <span className="flex items-center gap-2">
@@ -115,17 +115,17 @@ export const Login = () => {
             <div className="mt-8">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-slate-200 dark:border-slate-700" />
+                  <div className="w-full border-t border-slate-200" />
                 </div>
                 <div className="relative flex justify-center text-xs">
-                  <span className="px-2 bg-white dark:bg-slate-900 text-slate-500">Or continue with</span>
+                  <span className="px-2 bg-white text-slate-500">Or continue with</span>
                 </div>
               </div>
 
-              <div className="mt-6">
+               <div className="mt-6">
                 <button
                   type="button"
-                  className="w-full flex justify-center items-center gap-3 py-2.5 px-4 border border-slate-300 dark:border-slate-700 rounded-xl shadow-sm bg-white dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"
+                  className="w-full flex justify-center items-center gap-3 py-2.5 px-4 border border-slate-300 rounded-xl shadow-sm bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-all"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path
@@ -150,9 +150,9 @@ export const Login = () => {
               </div>
             </div>
 
-            <p className="mt-8 text-center text-xs text-slate-600 dark:text-slate-400">
+            <p className="mt-8 text-center text-xs text-slate-600">
               Don't have an account?{' '}
-              <Link to="/register" className="font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors">
+              <Link to="/register" className="font-semibold text-green-600 hover:text-green-500 transition-colors">
                 Sign Up
               </Link>
             </p>

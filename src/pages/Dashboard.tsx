@@ -50,7 +50,7 @@ const CircularProgress = ({ pct }: { pct: number }) => {
         <circle cx="50" cy="50" r={R} stroke="#e2e8f0" strokeWidth="10" fill="none" />
         <motion.circle
           cx="50" cy="50" r={R}
-          stroke="url(#emerald-grad)"
+          stroke="url(#green-grad)"
           strokeWidth="10"
           fill="none"
           strokeLinecap="round"
@@ -60,9 +60,9 @@ const CircularProgress = ({ pct }: { pct: number }) => {
           transition={{ duration: 1.4, ease: 'easeOut', delay: 0.3 }}
         />
         <defs>
-          <linearGradient id="emerald-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="100%" stopColor="#14b8a6" />
+          <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#22c55e" />
+            <stop offset="100%" stopColor="#16a34a" />
           </linearGradient>
         </defs>
       </svg>
@@ -112,7 +112,7 @@ export const Dashboard = () => {
         {/* Logo */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow">
               <span className="text-white font-bold text-sm">P</span>
             </div>
             <span className="text-lg font-bold text-slate-800 tracking-tight">PrepForge</span>
@@ -133,13 +133,13 @@ export const Dashboard = () => {
                 className={`
                   w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all
                   ${isActive
-                    ? 'bg-emerald-50 text-emerald-700 shadow-sm'
+                    ? 'bg-green-50 text-green-700 shadow-sm'
                     : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'}
                 `}
               >
-                <span className={isActive ? 'text-emerald-600' : ''}>{item.icon}</span>
+                <span className={isActive ? 'text-green-600' : ''}>{item.icon}</span>
                 {item.label}
-                {isActive && <ChevronRight className="w-4 h-4 ml-auto text-emerald-400" />}
+                {isActive && <ChevronRight className="w-4 h-4 ml-auto text-green-400" />}
               </button>
             );
           })}
@@ -148,7 +148,7 @@ export const Dashboard = () => {
         {/* Bottom user card */}
         <div className="px-4 py-5 border-t border-slate-100">
           <div className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-50 transition cursor-pointer">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-sm shadow">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center text-white font-bold text-sm shadow">
               S
             </div>
             <div className="flex-1 min-w-0">
@@ -167,7 +167,7 @@ export const Dashboard = () => {
         <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
-              className="lg:hidden text-slate-500 hover:text-emerald-600 transition"
+              className="lg:hidden text-slate-500 hover:text-green-600 transition"
               onClick={() => setSidebarOpen(true)}
             >
               <Menu className="w-6 h-6" />
@@ -180,9 +180,9 @@ export const Dashboard = () => {
           <div className="flex items-center gap-3">
             <button className="relative p-2 rounded-xl hover:bg-slate-100 transition text-slate-500">
               <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-green-500" />
             </button>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-sm shadow cursor-pointer">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center text-white font-bold text-sm shadow cursor-pointer">
               S
             </div>
           </div>
@@ -200,7 +200,7 @@ export const Dashboard = () => {
             <motion.span
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-semibold border border-green-200"
             >
               <TrendingUp className="w-3.5 h-3.5" /> Streak Active
             </motion.span>
@@ -212,8 +212,8 @@ export const Dashboard = () => {
             {/* 1. Daily Target */}
             <Card className="xl:col-span-1">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                  <Target className="w-5 h-5 text-emerald-600" />
+                <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <Target className="w-5 h-5 text-green-600" />
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Daily Target</p>
@@ -224,7 +224,7 @@ export const Dashboard = () => {
               <div className="space-y-1.5">
                 <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400"
+                    className="h-full rounded-full bg-gradient-to-r from-green-500 to-green-600"
                     initial={{ width: '0%' }}
                     animate={{ width: '40%' }}
                     transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
@@ -295,8 +295,8 @@ export const Dashboard = () => {
               <h3 className="text-base font-bold text-slate-800 mb-4">Recent Activity</h3>
               <ul className="space-y-3">
                 {[
-                  { label: 'Solved: Two Sum',         time: '2 hrs ago',  color: 'bg-emerald-500' },
-                  { label: 'Solved: Valid Parentheses', time: '5 hrs ago', color: 'bg-emerald-500' },
+                  { label: 'Solved: Two Sum',         time: '2 hrs ago',  color: 'bg-green-500' },
+                  { label: 'Solved: Valid Parentheses', time: '5 hrs ago', color: 'bg-green-500' },
                   { label: 'Attempted: Merge K Lists', time: 'Yesterday',  color: 'bg-orange-400' },
                   { label: 'Watched: Recursion Module', time: '2 days ago', color: 'bg-blue-500' },
                 ].map((item, i) => (
@@ -314,7 +314,7 @@ export const Dashboard = () => {
               <h3 className="text-base font-bold text-slate-800 mb-4">Quick Actions</h3>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { label: 'Practice Today', icon: <Code2 className="w-4 h-4" />, color: 'from-emerald-500 to-teal-500' },
+                  { label: 'Practice Today', icon: <Code2 className="w-4 h-4" />, color: 'from-green-500 to-green-600' },
                   { label: 'View Roadmap',   icon: <Map   className="w-4 h-4" />, color: 'from-blue-500 to-indigo-500' },
                   { label: 'Ask AI Mentor',  icon: <Bot   className="w-4 h-4" />, color: 'from-violet-500 to-purple-500' },
                   { label: 'Update Resume',  icon: <FileText className="w-4 h-4" />, color: 'from-orange-400 to-rose-500' },
@@ -354,10 +354,10 @@ export const Dashboard = () => {
                   title: 'Career Roadmaps',
                   desc: 'Step-by-step paths to your target role.',
                   icon: <Map className="w-5 h-5" />,
-                  gradient: 'from-emerald-500 to-teal-500',
-                  lightBg: 'bg-emerald-50',
-                  lightText: 'text-emerald-700',
-                  borderHover: 'hover:border-emerald-200',
+                  gradient: 'from-green-500 to-green-700',
+                  lightBg: 'bg-green-50',
+                  lightText: 'text-green-700',
+                  borderHover: 'hover:border-green-200',
                   path: '/roadmaps',
                   cta: 'Open',
                 },

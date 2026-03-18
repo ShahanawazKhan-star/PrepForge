@@ -9,12 +9,12 @@ export const Navbar = () => {
 
         {/* Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-sm">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-sm">
             <span className="text-white font-bold text-sm">P</span>
           </div>
           <Link
             to="/"
-            className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 tracking-tight"
+            className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-700 tracking-tight"
           >
             PrepForge
           </Link>
@@ -24,19 +24,19 @@ export const Navbar = () => {
         <nav className="hidden md:flex items-center gap-7">
           <a
             href="#features"
-            className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors"
+            className="text-sm font-medium text-slate-600 hover:text-green-600 transition-colors"
           >
             Features
           </a>
           <a
             href="#curriculum"
-            className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors"
+            className="text-sm font-medium text-slate-600 hover:text-green-600 transition-colors"
           >
             Curriculum
           </a>
           <button
             onClick={() => navigate('/explore')}
-            className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors"
+            className="text-sm font-medium text-slate-600 hover:text-green-600 transition-colors"
           >
             Explore
           </button>

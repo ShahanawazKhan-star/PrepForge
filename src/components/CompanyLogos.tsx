@@ -11,13 +11,13 @@ const companies = [
 
 export const CompanyLogos = () => {
   return (
-    <div className="py-12 bg-white dark:bg-slate-900 border-y border-slate-100 dark:border-slate-800 transition-colors duration-300">
+    <div className="py-20 bg-slate-50 border-y border-slate-100 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-8">
+        <p className="text-center text-sm font-semibold text-slate-400 uppercase tracking-wider mb-10">
           Our Students Work At Top Tech Companies
         </p>
         
-        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 lg:gap-24 opacity-70 hover:opacity-100 transition-opacity duration-500">
+        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 lg:gap-24 opacity-60 hover:opacity-100 transition-opacity duration-500">
           {companies.map((company, index) => (
             <motion.div
               key={company.name}
@@ -27,7 +27,7 @@ export const CompanyLogos = () => {
               viewport={{ once: true }}
               className="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer"
             >
-              <span className={`${company.style} text-slate-800 dark:text-slate-300`}>
+              <span className={`${company.style} text-slate-900`}>
                 {company.name}
               </span>
             </motion.div>

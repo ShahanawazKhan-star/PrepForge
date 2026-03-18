@@ -84,7 +84,7 @@ const navItems = [
 // ─── Difficulty badge ─────────────────────────────────────────────────────────
 const DiffBadge = ({ level }: { level: string }) => {
   const styles: Record<string, string> = {
-    Easy:   'bg-emerald-100 text-emerald-700 border-emerald-200',
+    Easy:   'bg-green-100 text-green-700 border-green-200',
     Medium: 'bg-amber-100   text-amber-700   border-amber-200',
     Hard:   'bg-red-100     text-red-700     border-red-200',
   };
@@ -107,7 +107,7 @@ const Select = ({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full appearance-none bg-slate-800 text-slate-200 text-sm rounded-lg px-3 py-2 pr-8 border border-slate-700 focus:outline-none focus:border-emerald-500 cursor-pointer"
+        className="w-full appearance-none bg-white text-slate-700 text-sm rounded-lg px-3 py-2 pr-8 border border-slate-200 focus:outline-none focus:border-green-500 cursor-pointer shadow-sm"
       >
         {options.map((o) => <option key={o} value={o}>{o}</option>)}
       </select>
@@ -129,12 +129,12 @@ const CodeLine = ({ line, num }: { line: string; num: number }) => {
     .replace(/\b(\d+)\b/g,                            '<span class="text-sky-400">$1</span>');
 
   return (
-    <div className="flex group hover:bg-slate-800/60">
-      <span className="select-none w-10 shrink-0 text-right pr-4 text-slate-600 text-xs leading-6 group-hover:text-slate-500">
+    <div className="flex group hover:bg-slate-50">
+      <span className="select-none w-10 shrink-0 text-right pr-4 text-slate-300 text-xs leading-6 group-hover:text-slate-400">
         {num}
       </span>
       <span
-        className="text-slate-300 text-xs leading-6 font-mono whitespace-pre flex-1"
+        className="text-slate-700 text-xs leading-6 font-mono whitespace-pre flex-1"
         dangerouslySetInnerHTML={{ __html: coloured || '&nbsp;' }}
       />
     </div>
@@ -208,7 +208,7 @@ export const CodingPractice = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex text-white font-sans">
+    <div className="min-h-screen bg-white flex text-slate-900 font-sans">
 
       {/* Mobile overlay */}
       {sidebarOpen && (
@@ -217,18 +217,18 @@ export const CodingPractice = () => {
 
       {/* ══ SIDEBAR ══ */}
       <aside className={`
-        fixed top-0 left-0 h-screen w-60 bg-slate-900 border-r border-slate-800
+        fixed top-0 left-0 h-screen w-60 bg-white border-r border-slate-100
         flex flex-col z-50 transition-transform duration-300
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:translate-x-0 lg:static lg:z-auto
+        lg:translate-x-0 lg:static lg:z-auto lg:shadow-none
       `}>
         {/* Logo */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-800">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
           <button className="flex items-center gap-2" onClick={() => navigate('/')}>
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-sm">
               <span className="text-white font-bold text-xs">P</span>
             </div>
-            <span className="text-base font-bold text-white tracking-tight">PrepForge</span>
+            <span className="text-base font-bold text-slate-900 tracking-tight">PrepForge</span>
           </button>
           <button className="lg:hidden text-slate-400" onClick={() => setSidebarOpen(false)}><X className="w-4 h-4" /></button>
         </div>
@@ -243,27 +243,27 @@ export const CodingPractice = () => {
                 onClick={() => { navigate(item.path); setSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                   isActive
-                    ? 'bg-emerald-600/20 text-emerald-400'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    ? 'bg-green-50 text-green-700 border border-green-100'
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
-                <span className={isActive ? 'text-emerald-400' : ''}>{item.icon}</span>
+                <span className={isActive ? 'text-green-600' : ''}>{item.icon}</span>
                 {item.label}
-                {isActive && <ChevronRight className="w-3.5 h-3.5 ml-auto text-emerald-500" />}
+                {isActive && <ChevronRight className="w-3.5 h-3.5 ml-auto text-green-400" />}
               </button>
             );
           })}
         </nav>
 
         {/* User */}
-        <div className="px-3 py-4 border-t border-slate-800">
-          <div className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-800 transition cursor-pointer">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-xs shadow">S</div>
+        <div className="px-3 py-4 border-t border-slate-100">
+          <div className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-50 transition cursor-pointer">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center text-white font-bold text-xs shadow-sm">S</div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-slate-200 truncate">Student</p>
-              <p className="text-xs text-slate-500 truncate">Free Plan</p>
+              <p className="text-sm font-semibold text-slate-800 truncate">Student</p>
+              <p className="text-xs text-slate-400 truncate">Free Plan</p>
             </div>
-            <Settings className="w-4 h-4 text-slate-500 flex-shrink-0" />
+            <Settings className="w-4 h-4 text-slate-400 flex-shrink-0" />
           </div>
         </div>
       </aside>
@@ -272,28 +272,28 @@ export const CodingPractice = () => {
       <div className="flex-1 flex flex-col min-w-0">
 
         {/* Top bar */}
-        <header className="sticky top-0 z-30 bg-slate-900/90 backdrop-blur border-b border-slate-800 px-5 py-3 flex items-center gap-4">
-          <button className="lg:hidden text-slate-400 hover:text-emerald-400" onClick={() => setSidebarOpen(true)}>
+        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 px-5 py-3 flex items-center gap-4">
+          <button className="lg:hidden text-slate-400 hover:text-green-400" onClick={() => setSidebarOpen(true)}>
             <Menu className="w-5 h-5" />
           </button>
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-1.5 text-slate-400 hover:text-emerald-400 transition text-sm font-semibold"
+            className="flex items-center gap-1.5 text-slate-400 hover:text-green-400 transition text-sm font-semibold"
           >
             <ChevronLeft className="w-4 h-4" /> Dashboard
           </button>
           <div className="h-5 w-px bg-slate-700" />
           <div className="flex items-center gap-2">
-            <Code2 className="w-4 h-4 text-emerald-500" />
-            <span className="text-white font-bold text-sm">Coding Practice</span>
+            <Code2 className="w-4 h-4 text-green-600" />
+            <span className="text-slate-900 font-bold text-sm">Coding Practice</span>
           </div>
           <div className="ml-auto flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold border border-emerald-500/20">
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-500/10 text-green-400 text-xs font-semibold border border-green-500/20">
               <Zap className="w-3 h-3" /> 5-Day Streak
             </div>
             <button className="relative p-2 rounded-xl hover:bg-slate-800 text-slate-400">
               <Bell className="w-4 h-4" />
-              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-green-500" />
             </button>
           </div>
         </header>
@@ -302,20 +302,20 @@ export const CodingPractice = () => {
         <div className="flex flex-1 overflow-hidden">
 
           {/* ── LEFT PANEL ── */}
-          <div className="w-72 shrink-0 bg-slate-900 border-r border-slate-800 flex flex-col overflow-hidden">
+          <div className="w-72 shrink-0 bg-white border-r border-slate-100 flex flex-col overflow-hidden">
 
             {/* Filters */}
-            <div className="p-4 border-b border-slate-800 space-y-3">
-              <p className="text-xs font-bold text-slate-300 uppercase tracking-widest mb-2">Filters</p>
+            <div className="p-4 border-b border-slate-100 space-y-3">
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Filters</p>
               <Select label="Language"   value={lang}  options={LANGUAGES}    onChange={selectLang} />
               <Select label="Difficulty" value={diff}  options={DIFFICULTIES} onChange={setDiff}    />
               <Select label="Topic"      value={topic} options={TOPICS}       onChange={setTopic}   />
             </div>
 
             {/* Stats strip */}
-            <div className="flex divide-x divide-slate-800 border-b border-slate-800">
+            <div className="flex divide-x divide-slate-100 border-b border-slate-100">
               {[
-                { label: 'Easy',   count: ALL_PROBLEMS.filter(p => p.difficulty === 'Easy').length,   color: 'text-emerald-400' },
+                { label: 'Easy',   count: ALL_PROBLEMS.filter(p => p.difficulty === 'Easy').length,   color: 'text-green-400' },
                 { label: 'Medium', count: ALL_PROBLEMS.filter(p => p.difficulty === 'Medium').length, color: 'text-amber-400'   },
                 { label: 'Hard',   count: ALL_PROBLEMS.filter(p => p.difficulty === 'Hard').length,   color: 'text-red-400'     },
               ].map((s) => (
@@ -326,30 +326,30 @@ export const CodingPractice = () => {
               ))}
             </div>
 
-            {/* Problem list */}
+                {/* Problem list */}
             <div className="flex-1 overflow-y-auto">
               {filtered.length === 0 ? (
-                <p className="text-center text-slate-500 text-sm mt-8">No problems match.</p>
+                <p className="text-center text-slate-400 text-sm mt-8">No problems match.</p>
               ) : (
                 filtered.map((p) => (
                   <button
                     key={p.id}
                     onClick={() => selectProblem(p)}
-                    className={`w-full flex items-start gap-3 px-4 py-3.5 border-b border-slate-800/60 text-left transition-all hover:bg-slate-800/60 ${
-                      selected.id === p.id ? 'bg-slate-800 border-l-2 border-l-emerald-500' : ''
+                    className={`w-full flex items-start gap-3 px-4 py-3.5 border-b border-slate-50 text-left transition-all hover:bg-slate-50 ${
+                      selected.id === p.id ? 'bg-green-50/50 border-l-4 border-l-green-500' : ''
                     }`}
                   >
                     {p.completed
-                      ? <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
-                      : <Circle       className="w-4 h-4 text-slate-600 mt-0.5 shrink-0" />
+                      ? <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
+                      : <Circle       className="w-4 h-4 text-slate-300 mt-0.5 shrink-0" />
                     }
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-semibold truncate ${selected.id === p.id ? 'text-white' : 'text-slate-300'}`}>
+                      <p className={`text-sm font-semibold truncate ${selected.id === p.id ? 'text-slate-900' : 'text-slate-700'}`}>
                         {p.id}. {p.title}
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <DiffBadge level={p.difficulty} />
-                        <span className="text-[10px] text-slate-500">{p.topic}</span>
+                        <span className="text-[10px] text-slate-400">{p.topic}</span>
                       </div>
                     </div>
                   </button>
@@ -359,13 +359,13 @@ export const CodingPractice = () => {
           </div>
 
           {/* ── RIGHT EDITOR PANEL ── */}
-          <div className="flex-1 flex flex-col bg-slate-950 min-w-0">
+          <div className="flex-1 flex flex-col bg-white min-w-0">
 
             {/* Problem header */}
-            <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between gap-4">
+            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3 min-w-0">
-                {submitted && <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />}
-                <h2 className="text-base font-bold text-white truncate">{selected.id}. {selected.title}</h2>
+                {submitted && <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />}
+                <h2 className="text-base font-bold text-slate-900 truncate">{selected.id}. {selected.title}</h2>
                 <DiffBadge level={selected.difficulty} />
               </div>
               <div className="flex items-center gap-2 shrink-0 text-slate-400 text-xs font-semibold">
@@ -374,10 +374,10 @@ export const CodingPractice = () => {
             </div>
 
             {/* Editor tabs */}
-            <div className="flex items-center gap-1 px-4 py-2 bg-slate-900 border-b border-slate-800">
+            <div className="flex items-center gap-1 px-4 py-2 bg-slate-50 border-b border-slate-100">
               {['solution', 'description', 'testcases'].map((tab) => (
                 <button key={tab} className={`px-3 py-1 rounded-lg text-xs font-semibold transition ${
-                  tab === 'solution' ? 'bg-slate-800 text-white' : 'text-slate-500 hover:text-slate-300'
+                  tab === 'solution' ? 'bg-white text-slate-900 shadow-sm border border-slate-100' : 'text-slate-500 hover:text-slate-800'
                 }`}>
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </button>
@@ -389,7 +389,7 @@ export const CodingPractice = () => {
             </div>
 
             {/* Code area */}
-            <div className="flex-1 overflow-auto bg-slate-950 relative">
+            <div className="flex-1 overflow-auto bg-white relative">
               <div className="absolute inset-0 overflow-auto">
                 {code.split('\n').map((line, i) => (
                   <CodeLine key={i} line={line} num={i + 1} />
@@ -400,8 +400,8 @@ export const CodingPractice = () => {
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 spellCheck={false}
-                className="absolute inset-0 w-full h-full bg-transparent text-transparent caret-emerald-400 font-mono text-xs leading-6 pl-10 pr-4 py-0 resize-none focus:outline-none z-10"
-                style={{ caretColor: '#34d399' }}
+                className="absolute inset-0 w-full h-full bg-transparent text-transparent caret-green-400 font-mono text-xs leading-6 pl-10 pr-4 py-0 resize-none focus:outline-none z-10"
+                style={{ caretColor: '#22c55e' }}
               />
             </div>
 
@@ -411,19 +411,19 @@ export const CodingPractice = () => {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="border-t border-slate-800 bg-slate-900 px-5 py-4 max-h-44 overflow-y-auto"
+                className="border-t border-slate-100 bg-slate-50 px-5 py-4 max-h-44 overflow-y-auto"
               >
-                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Console Output</p>
-                <pre className="text-xs text-slate-300 font-mono whitespace-pre-wrap leading-5">{output}</pre>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Console Output</p>
+                <pre className="text-xs text-slate-700 font-mono whitespace-pre-wrap leading-5">{output}</pre>
               </motion.div>
             )}
 
             {/* Bottom action bar */}
-            <div className="border-t border-slate-800 bg-slate-900 px-5 py-3 flex items-center gap-3">
+            <div className="border-t border-slate-100 bg-white px-5 py-3 flex items-center gap-3">
               <button
                 onClick={handleRun}
                 disabled={running}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold transition-all disabled:opacity-60"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold transition-all disabled:opacity-60"
               >
                 {running ? (
                   <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -436,7 +436,7 @@ export const CodingPractice = () => {
               <button
                 onClick={handleSubmit}
                 disabled={running}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-sm font-bold transition-all shadow hover:shadow-emerald-500/30 disabled:opacity-60"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white text-sm font-bold transition-all shadow hover:shadow-green-500/30 disabled:opacity-60"
               >
                 {running ? (
                   <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -447,7 +447,7 @@ export const CodingPractice = () => {
               </button>
 
               <div className="ml-auto flex items-center gap-2 text-xs text-slate-500 font-semibold">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
                 {ALL_PROBLEMS.filter(p => p.completed).length}/{ALL_PROBLEMS.length} Solved
               </div>
             </div>
