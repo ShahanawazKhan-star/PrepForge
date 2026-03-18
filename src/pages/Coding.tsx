@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Map } from 'lucide-react';
+import { ArrowLeft, Code } from 'lucide-react';
 
-const Roadmaps = () => {
+const Coding = () => {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white text-slate-900 border-t border-slate-100 p-4">
       <div className="text-center max-w-md w-full">
         <div className="w-20 h-20 bg-green-50 rounded-3xl flex items-center justify-center mx-auto mb-8 animate-bounce">
-          <Map className="w-10 h-10 text-green-600" />
+          <Code className="w-10 h-10 text-green-600" />
         </div>
-        <h1 className="text-4xl font-extrabold mb-4 tracking-tight">Career Roadmaps</h1>
+        <h1 className="text-4xl font-extrabold mb-4 tracking-tight">Coding Practice</h1>
         <p className="text-lg text-slate-500 mb-10 leading-relaxed">
-          The ultimate career paths for developers are currently being crafted. Stay tuned for expert-curated roadmaps!
+          Master DSA and problem-solving with our upcoming interactive coding playground.
         </p>
         <button 
           onClick={() => navigate('/')}
@@ -24,4 +24,4 @@ const Roadmaps = () => {
   );
 };
 
-export default Roadmaps;
+export default Coding;

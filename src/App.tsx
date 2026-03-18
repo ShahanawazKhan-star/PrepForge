@@ -1,23 +1,24 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Login } from './pages/Login';
-import { Dashboard } from './pages/Dashboard';
-import { CodingPractice } from './pages/CodingPractice';
-import { Explore } from './pages/Explore';
-import { Roadmaps } from './pages/Roadmaps';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Roadmaps from './pages/Roadmaps';
+import Coding from './pages/Coding';
+import Jobs from './pages/Jobs';
+import { Login } from './pages/Login'; // Import Login using named import
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/practice" element={<CodingPractice />} />
-      <Route path="/explore" element={<Explore />} />
-      <Route path="/roadmaps" element={<Roadmaps />} />
-    </Routes>
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/roadmaps" element={<Roadmaps />} />
+        <Route path="/coding-practice" element={<Coding />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </div>
   );
 }
 
 export default App;
-

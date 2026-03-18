@@ -1,57 +1,36 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Code2 } from 'lucide-react';
 
-export const Navbar = () => {
-  const navigate = useNavigate();
-
+const Navbar = () => {
   return (
-    <header className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-sticky border-b border-slate-200 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <nav className="border-b border-slate-200 bg-white sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
 
-        {/* Logo */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-sm">
-            <span className="text-white font-bold text-sm">P</span>
+          {/* Stylish Logo section */}
+          <Link to="/" className="flex items-center gap-2">
+            <div className="bg-green-600 p-1.5 rounded-lg shadow-sm">
+              <Code2 className="w-5 h-5 text-white stroke-[2.5]" />
+            </div>
+            <span className="text-2xl font-extrabold text-slate-900 tracking-tight">
+              PrepForge
+            </span>
+          </Link>
+
+          {/* Sign up Button */}
+          <div className="flex items-center gap-4">
+            <Link to="/explore" className="hidden sm:block text-slate-600 hover:text-green-600 font-medium transition-colors">
+              Explore
+            </Link>
+            <Link to="/login" className="bg-green-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors shadow-sm">
+              Sign up
+            </Link>
           </div>
-          <Link
-            to="/"
-            className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-700 tracking-tight"
-          >
-            PrepForge
-          </Link>
-        </div>
 
-        {/* Nav links */}
-        <nav className="hidden md:flex items-center gap-7">
-          <a
-            href="#features"
-            className="text-sm font-medium text-slate-600 hover:text-green-600 transition-colors"
-          >
-            Features
-          </a>
-          <a
-            href="#curriculum"
-            className="text-sm font-medium text-slate-600 hover:text-green-600 transition-colors"
-          >
-            Curriculum
-          </a>
-          <button
-            onClick={() => navigate('/explore')}
-            className="text-sm font-medium text-slate-600 hover:text-green-600 transition-colors"
-          >
-            Explore
-          </button>
-        </nav>
-
-        {/* CTA */}
-        <div className="flex items-center gap-3">
-          <Link
-            to="/login"
-            className="px-5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold transition-all shadow-sm hover:shadow-md"
-          >
-            Login
-          </Link>
         </div>
       </div>
-    </header>
+    </nav>
   );
 };
+
+export default Navbar;
