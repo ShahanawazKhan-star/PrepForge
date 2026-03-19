@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Roadmaps from './pages/Roadmaps';
-import Coding from './pages/Coding';
+import CodingPractice from './pages/CodingPractice';
 import Jobs from './pages/Jobs';
 import { Login } from './pages/Login'; // Import Login using named import
 
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/roadmaps" element={<Roadmaps />} />
-        <Route path="/coding-practice" element={<Coding />} />
+        <Route path="/coding-practice" element={<CodingPractice />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/login" element={<Login />} />
       </Routes>
