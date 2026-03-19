@@ -201,7 +201,7 @@ export const Explore = () => {
       return () => clearTimeout(t);
     }
   }, [showToast]);
-
+  
   const handleFeatureClick = (path: string) => {
     if (isAuthenticated) {
       navigate(path);
