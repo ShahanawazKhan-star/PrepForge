@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Folder, Clock, Layers, X } from 'lucide-react';
+import Footer from '../components/Footer';
 
 type ProjectLevel = 'Beginner' | 'Intermediate' | 'Advanced';
 
@@ -228,6 +229,7 @@ export default function Projects() {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

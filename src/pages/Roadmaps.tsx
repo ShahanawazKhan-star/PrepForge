@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { roadmaps } from '../data/roadmaps';
 import type { RoadmapType } from '../data/roadmaps';
+import Footer from '../components/Footer';
 
 // Map icon strings to Lucide components
 const iconMap: Record<string, React.ElementType> = {
@@ -286,6 +287,7 @@ const Roadmaps = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <Footer />
     </div>
   );
 }

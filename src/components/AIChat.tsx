@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Sparkles, X, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 export const AIChat = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +10,9 @@ export const AIChat = () => {
     { id: 1, text: "Hello! I am your mentor. How can I help you today?", isAi: true }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  const hideChat = location.pathname === '/login' || location.pathname === '/signup';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -36,6 +40,8 @@ export const AIChat = () => {
       }]);
     }, 1000);
   };
+
+  if (hideChat) return null;
 
   return (
     <>

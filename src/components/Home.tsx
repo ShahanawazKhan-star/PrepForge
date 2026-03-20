@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Map, Code, Briefcase, Bot, Layout, Award } from 'lucide-react';
 import heroIllustration from '../assets/hero-illustration.png';
+import Footer from './Footer';
 
 const Home = () => {
   // Aapke 6 feature cards ka data
@@ -92,6 +93,7 @@ const Home = () => {
           <span className="text-2xl font-black text-slate-800 tracking-tighter">NETFLIX</span>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
