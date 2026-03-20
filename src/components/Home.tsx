@@ -92,7 +92,6 @@ const Home = () => {
           <span className="text-2xl font-black text-slate-800 tracking-tighter">NETFLIX</span>
         </div>
       </section>
-
     </div>
   );
 };
