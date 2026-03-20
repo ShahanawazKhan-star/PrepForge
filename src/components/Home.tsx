@@ -7,7 +7,7 @@ const Home = () => {
   const features = [
     { title: "Career Roadmaps", desc: "Guided paths for tech roles", icon: <Map className="w-6 h-6 text-green-600" />, path: "/roadmaps" },
     { title: "Coding Practice", desc: "Solve DSA & logic problems", icon: <Code className="w-6 h-6 text-green-600" />, path: "/coding-practice" },
-    { title: "Projects Section", desc: "Build real-world apps", icon: <Layout className="w-6 h-6 text-green-600" />, path: "#" },
+    { title: "Projects Section", desc: "Build real-world apps", icon: <Layout className="w-6 h-6 text-green-600" />, path: "/projects" },
     { title: "Mock Interviews", desc: "Practice with experts", icon: <Award className="w-6 h-6 text-green-600" />, path: "#" },
     { title: "Job Section", desc: "Find top tech jobs", icon: <Briefcase className="w-6 h-6 text-green-600" />, path: "/jobs" },
     { title: "AI Mentor", desc: "24/7 coding assistance", icon: <Bot className="w-6 h-6 text-green-600" />, path: "#" },

@@ -5,6 +5,10 @@ import Roadmaps from './pages/Roadmaps';
 import CodingPractice from './pages/CodingPractice';
 import Jobs from './pages/Jobs';
 import { Login } from './pages/Login'; // Import Login using named import
+import { SignUp } from './pages/SignUp';
+import Projects from './pages/Projects';
+import Dashboard from './pages/Dashboard';
+import { AIChat } from './components/AIChat';
 
 function App() {
   return (
@@ -16,7 +20,11 @@ function App() {
         <Route path="/coding-practice" element={<CodingPractice />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
+      <AIChat />
     </div>
   );
 }
