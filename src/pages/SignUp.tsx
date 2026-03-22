@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Lock, Github, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+import { toast } from 'react-hot-toast';
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -11,18 +13,42 @@ export const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(password !== confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!", {
+        style: { background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: '12px', fontWeight: '600' }
+      });
       return;
     }
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { full_name: name }
+        }
+      });
+
+      if (error) {
+        toast.error(error.message, {
+          style: { background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: '12px', fontWeight: '600' }
+        });
+      } else if (data.user) {
+        toast.success('Account created successfully! 🎉', {
+          style: { background: '#f0fdf4', color: '#166534', border: '1px solid #bbf7d0', borderRadius: '12px', fontWeight: '600' }
+        });
+        navigate('/dashboard');
+      }
+    } catch (err: any) {
+      toast.error('An unexpected error occurred.', {
+        style: { background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca', borderRadius: '12px', fontWeight: '600' }
+      });
+    } finally {
       setIsLoading(false);
-      navigate('/dashboard');
-    }, 1500);
+    }
   };
 
   return (

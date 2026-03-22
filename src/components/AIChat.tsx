@@ -1,15 +1,29 @@
 import { useState, useRef, useEffect } from 'react';
-import { Sparkles, X, Send } from 'lucide-react';
+import { Sparkles, X, Send, Bot, User, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+interface Message {
+  id: string;
+  role: 'user' | 'ai';
+  text: string;
+}
 
 export const AIChat = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! I am your mentor. How can I help you today?", isAi: true }
+  const [isTyping, setIsTyping] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 'init-1',
+      role: 'ai',
+      text: "Hi there! I'm your PrepForge AI Mentor. Need a hint on a coding problem?"
+    }
   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatSessionRef = useRef<any>(null);
   const location = useLocation();
 
   const hideChat = location.pathname === '/login' || location.pathname === '/signup';
@@ -20,25 +34,84 @@ export const AIChat = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isOpen]);
+  }, [messages, isTyping, isOpen]);
 
-  const handleSend = (e: React.FormEvent) => {
+  // Helper function to initialize or get the chat session
+  const getChatSession = () => {
+    if (chatSessionRef.current) return chatSessionRef.current;
+
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      toast.error("API Key missing in .env file!");
+      return null;
+    }
+
+    try {
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-1.5-flash',
+      });
+
+      // Start session with proper system instruction in the first message if needed, 
+      // but Gemini 1.5 Flash supports systemInstruction in getGenerativeModel too.
+      chatSessionRef.current = model.startChat({
+        history: [],
+        generationConfig: { maxOutputTokens: 500 }
+      });
+      return chatSessionRef.current;
+    } catch (error) {
+      console.error("Failed to init Gemini:", error);
+      return null;
+    }
+  };
+
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isTyping) return;
 
-    // Add user message
-    const userMsg = { id: messages.length + 1, text: input, isAi: false };
+    const userText = input;
+    const userMsg: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      text: userText
+    };
+
     setMessages(prev => [...prev, userMsg]);
     setInput('');
+    setIsTyping(true);
 
-    // Simulate AI typing timeout
-    setTimeout(() => {
-      setMessages(prev => [...prev, {
-        id: prev.length + 1,
-        text: "I'm a demo mentor for now! But in the future, I'll be able to help you debug code, recommend roadmaps, and more.",
-        isAi: true
-      }]);
-    }, 1000);
+    const session = getChatSession();
+    if (!session) {
+      toast.error('AI could not start. Check console.');
+      setIsTyping(false);
+      return;
+    }
+
+    try {
+      // Adding a system prompt prefix to guide the AI every time if needed, 
+      // or just trust the model init.
+      const prompt = `Context: You are PrepForge AI Mentor. Help with Full Stack/DSA. Hints only, no direct code unless asked twice. User says: ${userText}`;
+
+      const result = await session.sendMessage(prompt);
+      const response = await result.response;
+      const aiText = response.text();
+
+      setMessages(prev => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          role: 'ai',
+          text: aiText
+        }
+      ]);
+    } catch (error: any) {
+      console.error("Gemini API Error:", error);
+      // Clear session so it retries fresh next time
+      chatSessionRef.current = null;
+      toast.error("Connection failed. Try again!");
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   if (hideChat) return null;
@@ -47,75 +120,66 @@ export const AIChat = () => {
     <>
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed bottom-24 right-4 sm:right-6 lg:right-8 w-[calc(100vw-2rem)] sm:w-[380px] h-[450px] max-h-[80vh] z-[100]">
+          <div className="fixed bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-[350px] h-[500px] max-h-[85vh] z-[100] flex flex-col">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.2, type: 'spring', damping: 25, stiffness: 300 }}
-              className="w-full h-full bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden backdrop-blur-3xl bg-white/95"
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="w-full h-full bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 flex flex-col overflow-hidden ring-1 ring-white/10"
             >
               {/* Header */}
-              <div className="bg-slate-900 px-5 flex justify-between items-center text-white h-16 shrink-0 z-10">
+              <div className="bg-slate-900 border-b border-slate-800 px-4 py-4 flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-3">
-                  <div className="bg-emerald-500/20 p-2 rounded-xl border border-emerald-500/30">
-                    <Sparkles className="w-5 h-5 text-emerald-400" />
+                  <div className="bg-emerald-500/10 p-2 rounded-xl border border-emerald-500/20 shadow-inner">
+                    <Bot className="w-5 h-5 text-emerald-400" />
                   </div>
                   <div>
-                    <h3 className="font-extrabold text-[15px] tracking-tight text-white leading-tight">PrepForge AI Mentor</h3>
-                    <div className="flex items-center gap-1.5 mt-0.5">
+                    <h3 className="font-extrabold text-[15px] tracking-tight text-white leading-none">AI Mentor</h3>
+                    <div className="flex items-center gap-1.5 mt-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 relative flex items-center justify-center">
                         <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
                       </span>
-                      <span className="text-xs text-slate-300 font-medium">Online</span>
+                      <span className="text-[11px] uppercase tracking-widest text-emerald-500 font-bold">Online</span>
                     </div>
                   </div>
                 </div>
-                <button 
-                  onClick={() => setIsOpen(false)}
-                  className="text-slate-400 hover:text-white hover:bg-slate-800 p-2 rounded-xl transition-colors focus:outline-none"
-                >
-                  <X className="w-5 h-5" />
+                <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white p-2">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Chat Area */}
-              <div className="flex-1 overflow-y-auto p-5 bg-slate-50/50 space-y-4">
+              <div className="flex-1 overflow-y-auto p-4 bg-slate-900/50 space-y-4">
                 {messages.map((msg) => (
-                  <div 
-                    key={msg.id} 
-                    className={`flex ${msg.isAi ? 'justify-start' : 'justify-end'}`}
-                  >
-                    <div 
-                      className={`max-w-[85%] px-4 py-3 text-[15px] shadow-sm font-medium ${
-                        msg.isAi 
-                          ? 'bg-white text-slate-700 border border-slate-200 rounded-2xl rounded-tl-sm'
-                          : 'bg-emerald-600 text-white rounded-2xl rounded-tr-sm'
-                      }`}
-                    >
+                  <div key={msg.id} className={`flex ${msg.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
+                    <div className={`px-4 py-2.5 text-[14px] rounded-2xl ${msg.role === 'ai' ? 'bg-slate-800 text-slate-200' : 'bg-emerald-600 text-white'
+                      }`}>
                       {msg.text}
                     </div>
                   </div>
                 ))}
-                <div ref={messagesEndRef} className="h-2" />
+                {isTyping && (
+                  <div className="flex justify-start">
+                    <div className="bg-slate-800 rounded-2xl px-4 py-3 text-emerald-400 text-xs animate-pulse">
+                      Mentor is thinking...
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
               </div>
 
               {/* Input Area */}
-              <div className="p-4 bg-white border-t border-slate-100 shrink-0">
+              <div className="p-3 bg-slate-900 border-t border-slate-800">
                 <form onSubmit={handleSend} className="relative flex items-center">
                   <input
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask anything..."
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-5 pr-14 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-900 placeholder-slate-400 font-medium transition-all"
+                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:ring-1 focus:ring-emerald-500 outline-none"
                   />
-                  <button
-                    type="submit"
-                    disabled={!input.trim()}
-                    className="absolute right-2 p-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm focus:outline-none"
-                  >
-                    <Send className="w-5 h-5" />
+                  <button type="submit" disabled={!input.trim() || isTyping} className="absolute right-2 p-2 text-emerald-500">
+                    <Send className="w-4 h-4" />
                   </button>
                 </form>
               </div>
@@ -124,14 +188,11 @@ export const AIChat = () => {
         )}
       </AnimatePresence>
 
-      {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-4 sm:right-6 lg:right-8 bg-slate-900 border-2 border-slate-800 text-white p-4 rounded-full shadow-2xl hover:shadow-slate-300/50 hover:-translate-y-1 transition-all z-[90] flex items-center gap-2.5 group focus:outline-none focus:ring-4 focus:ring-emerald-500/30"
-        title="Chat with AI Mentor"
+        className="fixed bottom-6 right-4 sm:right-6 bg-slate-900 border border-emerald-500/30 text-white p-4 rounded-full z-[90]"
       >
-        <Sparkles className="w-6 h-6 text-emerald-400 group-hover:scale-110 transition-transform" />
-        <span className="hidden sm:inline-block font-extrabold text-sm tracking-wide mr-1">Ask AI</span>
+        {isOpen ? <X /> : <Sparkles className="text-emerald-400" />}
       </button>
     </>
   );
