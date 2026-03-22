@@ -49,7 +49,7 @@ export const AIChat = () => {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
-        model: "gemini-pro",
+        model: 'gemini-1.5-flash',
       });
 
       // Start session with proper system instruction in the first message if needed, 
