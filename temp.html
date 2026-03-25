@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed-variant": "#005236",
+                        "surface-dim": "#0b1326",
+                        "on-primary-fixed": "#002113",
+                        "on-tertiary-container": "#711419",
+                        "surface-container-high": "#222a3d",
+                        "on-primary": "#003824",
+                        "primary-container": "#10b981",
+                        "secondary-container": "#21523c",
+                        "on-surface": "#dae2fd",
+                        "outline": "#86948a",
+                        "on-primary-container": "#00422b",
+                        "tertiary-container": "#fc7c78",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface-container": "#171f33",
+                        "on-background": "#dae2fd",
+                        "surface-container-highest": "#2d3449",
+                        "on-secondary-fixed-variant": "#1e4f3a",
+                        "on-tertiary": "#650911",
+                        "on-secondary": "#013824",
+                        "on-tertiary-fixed": "#410005",
+                        "on-error": "#690005",
+                        "tertiary": "#ffb3af",
+                        "inverse-primary": "#006c49",
+                        "surface-variant": "#2d3449",
+                        "surface-container-low": "#131b2e",
+                        "primary": "#4edea3",
+                        "on-surface-variant": "#bbcabf",
+                        "on-secondary-fixed": "#002113",
+                        "secondary-fixed": "#baeed1",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "secondary": "#9ed2b5",
+                        "surface-container-lowest": "#060e20",
+                        "primary-fixed-dim": "#4edea3",
+                        "background": "#0b1326",
+                        "inverse-on-surface": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#3c4a42",
+                        "surface": "#0b1326",
+                        "secondary-fixed-dim": "#9ed2b5",
+                        "inverse-surface": "#dae2fd",
+                        "primary-fixed": "#6ffbbe",
+                        "on-secondary-container": "#91c4a8",
+                        "on-tertiary-fixed-variant": "#842225",
+                        "surface-tint": "#4edea3",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#31394d"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["JetBrains Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(11, 19, 38, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0b1326]/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] pb-[0.5px] after:content-[''] after:block after:h-[1px] after:bg-emerald-500/10">
+<div class="flex justify-between items-center px-8 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold tracking-tighter text-emerald-400 font-headline">The Kinetic Lab</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-400 font-medium font-headline tracking-tight hover:text-emerald-300 transition-colors duration-200" href="#">Lab</a>
+<a class="text-emerald-400 border-b-2 border-emerald-400 pb-1 font-headline tracking-tight hover:text-emerald-300 transition-colors duration-200" href="#">Projects</a>
+<a class="text-slate-400 font-medium font-headline tracking-tight hover:text-emerald-300 transition-colors duration-200" href="#">Docs</a>
+<a class="text-slate-400 font-medium font-headline tracking-tight hover:text-emerald-300 transition-colors duration-200" href="#">Academy</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-emerald-300 transition-all active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-emerald-300 transition-all active:opacity-80 active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-emerald-500/20">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of a professional software developer with a focused expression, soft studio lighting on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl_8qfRQobUUKg4Zd-VBlCfJa2hFQipFhGwalXifVqrYVGbQcRDWec6ze-l5FqX6YzKGDMwxy_ddY-Cfxu0xhsLKcV8iY0r5CcKkqG14AElmtG5dqRANmyOvseBjLUEm95ESiyZlo9zZjA1qStQkkiAqw4LJasQx2rwxzgnPLZZ4gvbduY7VSsu-xtQ8oXpbTlLl7mH9asJgkXc8UEiKZLb_p7luXy92a9nIcBA6V1OXMHVMeud8Mwo8oKAX39HdSrDQwDz7ZSp5s"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-[#0b1326]/80 backdrop-blur-2xl border-r border-emerald-500/10 z-40 hidden lg:block">
+<div class="flex flex-col py-6 gap-2 h-full">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center border border-emerald-500/20">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+</div>
+<div>
+<h3 class="font-headline text-slate-100 font-bold text-sm">Project Forge</h3>
+<p class="font-label text-[10px] text-slate-500 uppercase tracking-widest">Active Research</p>
+</div>
+</div>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 text-slate-400 p-3 mx-2 font-label text-xs uppercase tracking-widest hover:bg-slate-800/50 hover:text-slate-100 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+<span>Web Dev</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 p-3 mx-2 font-label text-xs uppercase tracking-widest hover:bg-slate-800/50 hover:text-slate-100 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span>Backend</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 p-3 mx-2 font-label text-xs uppercase tracking-widest hover:bg-slate-800/50 hover:text-slate-100 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="sports_esports">sports_esports</span>
+<span>Game Dev</span>
+</a>
+</div>
+<div class="mt-auto px-4 pb-8 space-y-4">
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-bold text-sm rounded-lg shadow-lg shadow-primary/10 hover:brightness-110 transition-all active:scale-95">
+                    Submit Proposal
+                </button>
+<div class="border-t border-emerald-500/5 pt-4">
+<a class="flex items-center gap-3 text-slate-400 p-3 mx-2 font-label text-[10px] uppercase tracking-widest hover:text-emerald-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="menu_book">menu_book</span>
+<span>Resources</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 p-3 mx-2 font-label text-[10px] uppercase tracking-widest hover:text-emerald-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 pt-16 min-h-screen">
+<div class="max-w-7xl mx-auto px-8 py-12">
+<!-- Page Header -->
+<header class="mb-16">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-2xl">
+<span class="font-label text-primary text-xs uppercase tracking-[0.2em] mb-3 block">Research Catalog</span>
+<h1 class="font-headline text-5xl font-bold text-slate-100 tracking-tighter mb-4">Available Projects</h1>
+<p class="text-slate-400 text-lg leading-relaxed">Select a terminal and begin your development journey. Each project is engineered to bridge the gap between theory and technical mastery.</p>
+</div>
+<div class="flex gap-2">
+<div class="h-12 w-12 rounded-lg bg-surface-container-high border border-outline-variant/15 flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</div>
+<div class="h-12 px-4 rounded-lg bg-surface-container-high border border-outline-variant/15 flex items-center gap-3 text-slate-400">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+<span class="text-xs font-label uppercase">Search Projects...</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Projects Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Project Card 1 -->
+<article class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent z-10"></div>
+<img alt="Weather Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="clean minimal weather application interface with soft blue gradients and glassmorphism elements" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCjiZ7euIg9Wpry0hwTCSBJV9sC_jk0h8mkD1y_7_GfO_y4pwp-Q05Z4uSI_bG-CZqf1uGJYKJFh_qTKRoXfMgR4sQxNzFTf2cfWgq_gh4q1D_5XcISqX6TSVhrxIuIoV1dLsoWJRGO3xPE4UKbsmS6tvXs0vXGfK3KigtxNGyiTFlhKSXciA4m30URmAYpqeh_wxeBaklBeRPkpmv5VGUv4O7wt3YTxcYYuQxZpFG93DfsMKZ47ceHIE06o5Nub4dPKnsTAj8CUo"/>
+<div class="absolute top-4 right-4 z-20">
+<span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-label px-2 py-1 rounded border border-emerald-500/30 backdrop-blur-md">EASY</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline text-xl font-bold text-slate-100 mb-2 group-hover:text-primary transition-colors">Build a Weather Dashboard</h3>
+<p class="text-slate-400 text-sm mb-6 line-clamp-2">Master API integration and state management by building a high-performance atmospheric tracking tool.</p>
+<div class="flex flex-wrap gap-2 mb-8 mt-auto">
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">REACT</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">TAILWIND</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">REST API</span>
+</div>
+<button class="w-full py-3 border border-primary/20 bg-primary/5 text-primary font-headline font-bold text-sm rounded transition-all hover:bg-primary hover:text-on-primary-container group-active:scale-95">
+                            Start Project
+                        </button>
+</div>
+<div class="absolute inset-0 border border-emerald-500/0 group-hover:border-emerald-500/20 transition-all rounded-xl pointer-events-none"></div>
+</article>
+<!-- Project Card 2 -->
+<article class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent z-10"></div>
+<img alt="E-commerce API" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="abstract representation of digital commerce with floating golden blocks and neon data lines on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcE_olj4jrIUNW9wpM9aBMYjUJaIMirbgK1KeftkSHIxhmpJ4agO0WGdYKhAwtQxTrpajqgf2x5yE-89CsQTVkDLXBGzyvbmUHI0iD1XqcPAtc-oCXch9WrI8X1-AWBMBP_mjNOE0ROqwbykRadBVXceQmOTspf2_dFYroo59PsSyPA79qN86JITWt5ZxTLWbPZBuXznBnDJ47I-fk5Ca8C1RhqZIFxgHW8Z8_vR0FwIExp1AFrGq_kq-vpYvzcsncaGBaOpA6N9A"/>
+<div class="absolute top-4 right-4 z-20">
+<span class="bg-amber-500/20 text-amber-400 text-[10px] font-label px-2 py-1 rounded border border-amber-500/30 backdrop-blur-md">MEDIUM</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline text-xl font-bold text-slate-100 mb-2 group-hover:text-primary transition-colors">Java E-commerce API</h3>
+<p class="text-slate-400 text-sm mb-6 line-clamp-2">Develop a robust backend infrastructure for scalable online retail using modern Spring Boot patterns.</p>
+<div class="flex flex-wrap gap-2 mb-8 mt-auto">
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">JAVA</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">SPRING BOOT</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">MYSQL</span>
+</div>
+<button class="w-full py-3 border border-primary/20 bg-primary/5 text-primary font-headline font-bold text-sm rounded transition-all hover:bg-primary hover:text-on-primary-container group-active:scale-95">
+                            Start Project
+                        </button>
+</div>
+</article>
+<!-- Project Card 3 -->
+<article class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent z-10"></div>
+<img alt="Endless Runner" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="neon futuristic city street at night with fast motion blur and cyberpunk aesthetic for a video game background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1b7EkdvkDuQrg3CBEwrLKBgcjsr3ksqmdYFCwB9ye_JT64ORnblCHHIS1jpwNtLX7zfgIWyrfvrzIYxAdW3pybXhwTHtY2Elem_Wsexb-SlES2IsTyf_ZTYXiG0mOOnyNsGNXCAhMDvOUVBxkVe1CGsRFXDEr3kJL1pFyQr3H4XyLNsKPWmC-VXf5SSRWjC6SLAUt7S3mskmoq_QiQz_VLEGyRbQ887Lly1iKSxJe0F5BCos-Kv6iRpg9ieiBHNDAwI1zduBymVs"/>
+<div class="absolute top-4 right-4 z-20">
+<span class="bg-rose-500/20 text-rose-400 text-[10px] font-label px-2 py-1 rounded border border-rose-500/30 backdrop-blur-md">HARD</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline text-xl font-bold text-slate-100 mb-2 group-hover:text-primary transition-colors">Endless Runner Game</h3>
+<p class="text-slate-400 text-sm mb-6 line-clamp-2">Dive into game mechanics, object pooling, and particle systems in a high-octane 3D environment.</p>
+<div class="flex flex-wrap gap-2 mb-8 mt-auto">
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">C#</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">UNITY</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">3D MATH</span>
+</div>
+<button class="w-full py-3 border border-primary/20 bg-primary/5 text-primary font-headline font-bold text-sm rounded transition-all hover:bg-primary hover:text-on-primary-container group-active:scale-95">
+                            Start Project
+                        </button>
+</div>
+</article>
+<!-- Project Card 4 -->
+<article class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent z-10"></div>
+<img alt="Discord Bot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="vibrant abstract visualization of digital networks and communication nodes with purple and blue light streaks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaGuqPlAgJcoibhT3mcfVSig-aVK_XOmXt7jyI6SoljQO-BVj7eJO8gvs1kTPUegAmcEtkEE9glOh9VQiYlpAklpQuz_lBplCV89eINUfdsxlKdnYZ8JDe-KxVVaBBn0qNxHjw7nmbvg00iXhggLaDzVl2buSaT13oTXbXIpCjDUtgDMUXl3D9i0czWgLp6WVdmoSockWtAceie7a4bRj-PvvMD1zjkyKbQMs3Lunvbb8B3nchDcElqnxCeVmspGVcj9CJG5Kuwp8"/>
+<div class="absolute top-4 right-4 z-20">
+<span class="bg-amber-500/20 text-amber-400 text-[10px] font-label px-2 py-1 rounded border border-amber-500/30 backdrop-blur-md">MEDIUM</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline text-xl font-bold text-slate-100 mb-2 group-hover:text-primary transition-colors">Discord Bot for Automation</h3>
+<p class="text-slate-400 text-sm mb-6 line-clamp-2">Create custom commands and automated workflows for server management using Node.js.</p>
+<div class="flex flex-wrap gap-2 mb-8 mt-auto">
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">NODE.JS</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">DISCORD.JS</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">MONGODB</span>
+</div>
+<button class="w-full py-3 border border-primary/20 bg-primary/5 text-primary font-headline font-bold text-sm rounded transition-all hover:bg-primary hover:text-on-primary-container group-active:scale-95">
+                            Start Project
+                        </button>
+</div>
+</article>
+<!-- Project Card 5 -->
+<article class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent z-10"></div>
+<img alt="Portfolio Site" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="minimalist desktop setup with high-end monitor showing a clean architectural website design in monochrome style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1xEvc07mVXRHLzDZCTVzmDskEm9mtjX9FCkJYm1pTR5p98v8_5mGYsM4QbnfJfVOPSBPEyyPi9fnJVmkUUPqo8LUAIQaHrs6Z-GUm_39CwlGaf-PkD-oovkPj-E2stOQW-DJrFb2Vbtvl9RSTGAH5a-hw85V9Duh9tamteTuQ5o3q-QehdTLuxZU3RqMr-f5fftxjJkcHWVX07rZonQN1PBlQ9R8AEmiQ70SNKrDUPrLsnw4GV_1lOtNG6lBJlaXWysmhPEQeL5g"/>
+<div class="absolute top-4 right-4 z-20">
+<span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-label px-2 py-1 rounded border border-emerald-500/30 backdrop-blur-md">EASY</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline text-xl font-bold text-slate-100 mb-2 group-hover:text-primary transition-colors">Personal Portfolio Site</h3>
+<p class="text-slate-400 text-sm mb-6 line-clamp-2">Engineer your digital presence with semantic HTML and advanced CSS layout techniques.</p>
+<div class="flex flex-wrap gap-2 mb-8 mt-auto">
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">HTML5</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">CSS3</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">ANIMATIONS</span>
+</div>
+<button class="w-full py-3 border border-primary/20 bg-primary/5 text-primary font-headline font-bold text-sm rounded transition-all hover:bg-primary hover:text-on-primary-container group-active:scale-95">
+                            Start Project
+                        </button>
+</div>
+</article>
+<!-- Project Card 6 -->
+<article class="group relative flex flex-col bg-surface-container-low rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent z-10"></div>
+<img alt="AI Image Generator" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="surreal swirling digital art with glowing neon particles forming a cosmic human profile on deep black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBataGR8kMJYUquSjdYOEQBYv3-5Q89epH8UzzD_v6uvculGH4gYD2ta2RRP08G-W3UPOzHkiCsceFlfE-ceUjjV3gcPWf32V2O5grDoRKW23Rd-lFqVmMcTndT83wqb_BeeUtyiyu24eh7nqHHnpaHiLLdMgICpx6fF7H22IdH5RevKHtxvHQVn-4owhGuEaH0SlQLYxwfSAtXPeQrlgshL8VFwkNrZ7Xih2lgoT6e696761xG3yNbAOl56RFdUIvqchz95uobF0Q"/>
+<div class="absolute top-4 right-4 z-20">
+<span class="bg-rose-500/20 text-rose-400 text-[10px] font-label px-2 py-1 rounded border border-rose-500/30 backdrop-blur-md">HARD</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline text-xl font-bold text-slate-100 mb-2 group-hover:text-primary transition-colors">AI Image Generator</h3>
+<p class="text-slate-400 text-sm mb-6 line-clamp-2">Harness the power of neural networks to generate synthetic imagery via deep learning models.</p>
+<div class="flex flex-wrap gap-2 mb-8 mt-auto">
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">PYTHON</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">PYTORCH</span>
+<span class="px-2 py-1 bg-surface-container-highest text-slate-300 text-[10px] font-label rounded">ML</span>
+</div>
+<button class="w-full py-3 border border-primary/20 bg-primary/5 text-primary font-headline font-bold text-sm rounded transition-all hover:bg-primary hover:text-on-primary-container group-active:scale-95">
+                            Start Project
+                        </button>
+</div>
+</article>
+</div>
+<!-- Bento Stats Section (Asymmetric) -->
+<section class="mt-24 grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-8 bg-surface-container-low rounded-xl p-8 border border-outline-variant/5 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] -mr-32 -mt-32"></div>
+<div class="relative z-10">
+<h4 class="font-headline text-2xl font-bold text-slate-100 mb-8">Forge Activity Matrix</h4>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div>
+<p class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-1">Total Builds</p>
+<p class="text-3xl font-headline font-bold text-emerald-400">14.2k</p>
+</div>
+<div>
+<p class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-1">Active Leads</p>
+<p class="text-3xl font-headline font-bold text-slate-100">842</p>
+</div>
+<div>
+<p class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-1">Deploy Rate</p>
+<p class="text-3xl font-headline font-bold text-emerald-400">98%</p>
+</div>
+<div>
+<p class="font-label text-[10px] text-slate-500 uppercase tracking-widest mb-1">Lab Hours</p>
+<p class="text-3xl font-headline font-bold text-slate-100">2.4m</p>
+</div>
+</div>
+<div class="mt-12 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-2/3 bg-gradient-to-r from-primary to-primary-container animate-pulse"></div>
+</div>
+<p class="mt-4 font-label text-[10px] text-slate-500">SYSTEM PERFORMANCE AT PEAK CAPACITY</p>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-primary rounded-xl p-8 flex flex-col justify-between group transition-all duration-500 hover:rotate-1">
+<div>
+<span class="material-symbols-outlined text-on-primary-container text-4xl mb-6" data-icon="auto_awesome">auto_awesome</span>
+<h4 class="font-headline text-2xl font-bold text-on-primary-container mb-4">Request Custom Research</h4>
+<p class="text-on-primary-container/70 text-sm leading-relaxed">Can't find the stack you're looking for? Propose a new research track to our lab directors.</p>
+</div>
+<button class="mt-8 py-3 bg-on-primary-container text-primary font-headline font-bold text-sm rounded transition-all hover:scale-105 active:scale-95">
+                        Open Proposal Forge
+                    </button>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="w-full py-12 mt-20 bg-[#0b1326] border-t border-emerald-500/5">
+<div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-6">
+<div class="flex gap-8">
+<a class="font-label text-[10px] text-slate-500 uppercase tracking-widest hover:text-emerald-400 transition-colors" href="#">Documentation</a>
+<a class="font-label text-[10px] text-slate-500 uppercase tracking-widest hover:text-emerald-400 transition-colors" href="#">API Status</a>
+<a class="font-label text-[10px] text-slate-500 uppercase tracking-widest hover:text-emerald-400 transition-colors" href="#">Open Source</a>
+<a class="font-label text-[10px] text-slate-500 uppercase tracking-widest hover:text-emerald-400 transition-colors" href="#">Security</a>
+<a class="font-label text-[10px] text-slate-500 uppercase tracking-widest hover:text-emerald-400 transition-colors" href="#">Privacy</a>
+</div>
+<p class="font-label text-[10px] text-slate-500 uppercase tracking-[0.3em]">© 2024 Kinetic Lab. Technical Excellence via Precision.</p>
+</div>
+</footer>
+</main>
+</body></html>

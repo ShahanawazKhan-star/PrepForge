@@ -1,196 +1,296 @@
 import { useState } from 'react';
-import { Folder, Clock, Layers, X, Search } from 'lucide-react';
+import {
+  Terminal,
+  Layout,
+  ShoppingCart,
+  CloudSun,
+  ChevronRight,
+  Code2,
+  Landmark,
+  Package,
+  LineChart,
+  Gamepad2,
+  MessageSquare,
+  Sparkles,
+  CheckSquare,
+  FileText,
+  X,
+  Layers
+} from 'lucide-react';
 import Footer from '../components/Footer';
 
-//... Projects logic definitions ...
-type ProjectLevel = 'Beginner' | 'Intermediate' | 'Advanced';
-
 interface Project {
-  id: number;
+  id: string;
   title: string;
   description: string;
-  level: ProjectLevel;
-  techStack: string[];
-  duration: string;
-  features: string[];
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  tags: string[];
+  icon: React.ElementType;
 }
 
-const projectsData: Project[] = [
+const projects: Project[] = [
   {
-    id: 1, title: "Personal Portfolio", description: "A responsive personal portfolio website to showcase your skills and projects.", level: "Beginner", techStack: ["React", "Tailwind", "HTML"], duration: "1 Week", features: ["Responsive Grid Layout", "Dark Mode Toggle", "Contact Form", "Smooth Scrolling Links"]
+    id: 'endless-runner',
+    title: 'Endless Runner Game',
+    description: 'Build a 3D endless runner game with procedural generation and obstacle avoidance mechanics.',
+    difficulty: 'Hard',
+    tags: ['Unity', 'C#', '3D Math'],
+    icon: Terminal
   },
   {
-    id: 2, title: "To-Do List App", description: "A simple task management application with local storage persistence.", level: "Beginner", techStack: ["React", "CSS", "LocalStorage"], duration: "1 Week", features: ["Add, Edit, Delete Tasks", "Filter Active/Completed", "Persistent Storage", "Clear All Button"]
+    id: 'ecommerce-api',
+    title: 'E-commerce API',
+    description: 'Develop a robust RESTful API for an online store with authentication and state management.',
+    difficulty: 'Medium',
+    tags: ['Node.js', 'Express', 'MongoDB'],
+    icon: ShoppingCart
   },
   {
-    id: 3, title: "Weather Dashboard", description: "Display current weather and forecast using a public weather API.", level: "Beginner", techStack: ["JavaScript", "API", "HTML"], duration: "1 Week", features: ["Fetch API Data", "Search by City", "5-Day Forecast", "Dynamic Backgrounds"]
+    id: 'weather-dashboard',
+    title: 'Weather Dashboard',
+    description: 'Create a dynamic weather app that fetches atmospheric data from external APIs.',
+    difficulty: 'Easy',
+    tags: ['React', 'Tailwind', 'REST API'],
+    icon: CloudSun
   },
   {
-    id: 4, title: "Expense Tracker", description: "Keep track of daily expenses and income with simple visual charts.", level: "Beginner", techStack: ["React", "Context API"], duration: "2 Weeks", features: ["Add Income/Expense", "Balance Calculation", "Transaction History", "Basic Chart"]
+    id: 'portfolio-site',
+    title: 'Portfolio Website',
+    description: 'Design a responsive personal portfolio to showcase your skills, resume, and contact info.',
+    difficulty: 'Easy',
+    tags: ['HTML5', 'CSS3', 'JavaScript'],
+    icon: Layout
   },
   {
-    id: 5, title: "E-commerce Storefront", description: "A frontend for an online store featuring product listing and a shopping cart.", level: "Intermediate", techStack: ["React", "Redux", "Tailwind"], duration: "3 Weeks", features: ["Product Grid with Filters", "Shopping Cart Management", "Product Details Page", "Mock Checkout Flow"]
+    id: 'banking-api',
+    title: 'Spring Boot Banking API',
+    description: 'A secure financial transaction API featuring JWT auth, role-based access, and money transfers.',
+    difficulty: 'Hard',
+    tags: ['Java', 'Spring Boot', 'PostgreSQL'],
+    icon: Landmark
   },
   {
-    id: 6, title: "Recipe Finder", description: "Search and discover new recipes based on available ingredients.", level: "Intermediate", techStack: ["React", "Node.js", "API"], duration: "3 Weeks", features: ["Ingredient Search via API", "Recipe Details Modal", "Save Favorites", "Pagination"]
+    id: 'inventory-system',
+    title: 'Java Inventory System',
+    description: 'Manage warehouse stock, track orders, and generate reports using a robust Java backend.',
+    difficulty: 'Medium',
+    tags: ['Java', 'Spring MVC', 'MySQL'],
+    icon: Package
   },
   {
-    id: 7, title: "Chat Application", description: "Real-time chat rooms where users can send and receive messages instantly.", level: "Intermediate", techStack: ["React", "Firebase", "Tailwind"], duration: "4 Weeks", features: ["User Authentication", "Real-time Messaging", "Multiple Chat Rooms", "Online Status Indicators"]
+    id: 'react-dashboard',
+    title: 'Analytics Dashboard',
+    description: 'Build a complex admin dashboard featuring real-time data visualization and interactive widgets.',
+    difficulty: 'Hard',
+    tags: ['React', 'Recharts', 'Tailwind'],
+    icon: LineChart
   },
   {
-    id: 8, title: "Markdown Editor Blog", description: "A blog platform where posts are written and rendered in Markdown.", level: "Intermediate", techStack: ["React", "Markdown", "CSS"], duration: "3 Weeks", features: ["Live Markdown Preview", "Save Drafts", "Export to PDF", "Code Syntax Highlighting"]
+    id: '2d-platformer',
+    title: '2D Pixel Platformer',
+    description: 'Create a retro-style platform game with physics, enemy AI, and parallax scrolling.',
+    difficulty: 'Medium',
+    tags: ['Godot', 'GDScript', 'Pixel Art'],
+    icon: Gamepad2
   },
   {
-    id: 9, title: "Social Media App", description: "A full-scale social networking platform with posts, likes, and comments.", level: "Advanced", techStack: ["MERN Stack", "Socket.io"], duration: "6 Weeks", features: ["JWT Authentication", "Post Image Uploads", "Real-time Notifications", "User Follow System"]
+    id: 'real-time-chat',
+    title: 'Real-Time Chat App',
+    description: 'Develop a full-stack chat application with live messaging, typing indicators, and online status.',
+    difficulty: 'Medium',
+    tags: ['React', 'Firebase', 'Socket.io'],
+    icon: MessageSquare
   },
   {
-    id: 10, title: "Task Management Board", description: "A drag-and-drop Kanban board for team collaboration.", level: "Advanced", techStack: ["React", "React DnD", "Node.js", "MongoDB"], duration: "5 Weeks", features: ["Drag and Drop Tasks", "Multiple Boards/Workspaces", "Task Assignments", "Activity Log"]
+    id: 'ai-image-ui',
+    title: 'AI Image Generator UI',
+    description: 'Design a sleek, futuristic interface connecting to OpenAI\'s DALL-E to generate custom images.',
+    difficulty: 'Hard',
+    tags: ['Next.js', 'OpenAI API', 'Tailwind'],
+    icon: Sparkles
   },
   {
-    id: 11, title: "Video Conference Tool", description: "A web-based video calling application for multiple participants.", level: "Advanced", techStack: ["WebRTC", "Node.js", "React"], duration: "6 Weeks", features: ["Peer-to-Peer Video/Audio", "Screen Sharing", "Mute/Camera Toggles", "Text Chat overlay"]
+    id: 'task-board',
+    title: 'Kanban Task Board',
+    description: 'Implement a drag-and-drop task management board perfect for tracking team productivity.',
+    difficulty: 'Medium',
+    tags: ['React', 'Zustand', 'DnD'],
+    icon: CheckSquare
   },
   {
-    id: 12, title: "AI Image Generator", description: "Generate images from text prompts using an external AI service API.", level: "Advanced", techStack: ["React", "OpenAI API", "Tailwind"], duration: "4 Weeks", features: ["Prompt Input & History", "Loading Skeleton UI", "Image Download/Share", "Gallery of Past Generations"]
+    id: 'markdown-blog',
+    title: 'Markdown Developer Blog',
+    description: 'A lightning-fast static blog platform where posts are written purely in markdown files.',
+    difficulty: 'Easy',
+    tags: ['React', 'MDX', 'Tailwind'],
+    icon: FileText
   }
 ];
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredProjects = projectsData.filter(p => 
-    p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    p.techStack.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  const getDifficultyColor = (level: string) => {
+    switch (level) {
+      case 'Easy': return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20';
+      case 'Medium': return 'text-amber-400 bg-amber-400/10 border-amber-400/20';
+      case 'Hard': return 'text-rose-400 bg-rose-400/10 border-rose-400/20';
+      default: return 'text-slate-400 bg-slate-400/10 border-slate-400/20';
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans py-12 px-4 sm:px-6 lg:px-8 flex flex-col">
-      <div className="flex-grow max-w-7xl mx-auto pt-10 w-full">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
-          <div className="text-center md:text-left">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">Project Hub</h1>
-            <p className="text-[15px] font-medium text-slate-600 max-w-2xl">
-              Build your portfolio with these carefully curated project ideas. Choose your difficulty level and start coding!
-            </p>
+    <div className="min-h-screen bg-slate-950 text-slate-200 flex flex-col pt-16 font-sans antialiased selection:bg-emerald-500/30">
+      <div className="flex-grow max-w-7xl mx-auto px-6 py-16 w-full">
+        {/* Header Section */}
+        <div className="mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+            <Code2 className="w-4 h-4" />
+            <span>Project Library</span>
           </div>
-          
-          <div className="w-full md:w-80 relative">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-slate-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search projects or skills..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full pl-12 pr-4 py-3.5 border border-slate-200 rounded-2xl leading-5 bg-white shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-semibold text-slate-800 text-[14px]"
-            />
-          </div>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+            Available Projects
+          </h1>
+          <p className="text-slate-400 text-lg max-w-2xl leading-relaxed">
+            Select a project and begin your development journey. Each project is engineered to bridge the gap between theory and technical mastery.
+          </p>
         </div>
 
-        {filteredProjects.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center">
-            <Search className="w-12 h-12 text-slate-300 mb-4" />
-            <h3 className="text-xl font-bold text-slate-800 mb-1">No projects found</h3>
-            <p className="text-slate-500 font-medium">Try adjusting your search criteria</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {filteredProjects.map(project => {
-              const isBeginner = project.level === "Beginner";
-              const isIntermediate = project.level === "Intermediate";
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {projects.map((project) => {
+            const Icon = project.icon;
 
-              const borderColor = isBeginner ? "border-t-[#3b82f6]" : isIntermediate ? "border-t-[#f97316]" : "border-t-[#a855f7]";
-              const levelColor = isBeginner ? "text-blue-600 bg-blue-50" : isIntermediate ? "text-orange-600 bg-orange-50" : "text-purple-600 bg-purple-50";
+            return (
+              <div
+                key={project.id}
+                className="group relative bg-slate-900 overflow-hidden rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)] flex flex-col"
+              >
+                {/* Subtle Background Glow */}
+                <div className="absolute top-0 right-0 p-32 bg-emerald-500/5 rounded-full blur-[100px] -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-              return (
-                <div key={project.id} className={`bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-200 border-t-[5px] ${borderColor} p-6 flex flex-col h-full`}>
-                  <div className="flex justify-between items-start mb-5">
-                    <div className={`px-3 py-1.5 rounded-full text-[11px] font-black uppercase tracking-wider ${levelColor}`}>
-                      {project.level}
+                <div className="p-8 flex flex-col flex-grow relative z-10">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 text-slate-300 group-hover:text-emerald-400 group-hover:bg-emerald-500/10 transition-colors duration-300">
+                      <Icon className="w-6 h-6" />
                     </div>
-                    <Folder className="w-5 h-5 text-slate-400" />
+                    <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${getDifficultyColor(project.difficulty)}`}>
+                      {project.difficulty.toUpperCase()}
+                    </span>
                   </div>
-                  
-                  <h3 className="text-xl font-black text-slate-900 mb-2 leading-tight">{project.title}</h3>
-                  <p className="text-slate-600 text-[14px] font-medium mb-6 flex-grow leading-relaxed">{project.description}</p>
-                  
-                  <div className="mb-6">
-                    <div className="flex flex-wrap gap-2">
-                      {project.techStack.map((tech, idx) => (
-                        <span key={idx} className="bg-slate-50 text-slate-600 text-[11px] font-bold px-2.5 py-1.5 rounded-lg border border-slate-200 uppercase tracking-wide">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+
+                  <h3 className="text-2xl font-bold text-slate-100 mb-3 group-hover:text-white transition-colors">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-slate-400 leading-relaxed mb-8 flex-grow">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-3 py-1 text-xs font-medium bg-slate-800 text-slate-300 rounded-lg border border-slate-700/50">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  
-                  <div className="flex items-center justify-between text-slate-500 text-sm mt-auto pt-5 border-t border-slate-100">
-                    <div className="flex items-center font-bold">
-                      <Clock className="w-4 h-4 mr-1.5 text-slate-400" />
-                      {project.duration}
-                    </div>
-                    <button 
-                      onClick={() => setSelectedProject(project)}
-                      className="flex items-center gap-1.5 text-emerald-600 font-bold hover:text-emerald-700 transition-colors"
-                    >
-                      Details <Layers className="w-4 h-4" />
-                    </button>
-                  </div>
+
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="flex items-center justify-between w-full py-3 px-4 bg-slate-800 hover:bg-emerald-500 text-slate-300 hover:text-slate-950 font-semibold rounded-xl transition-all duration-300 group/btn border border-slate-700 hover:border-transparent"
+                  >
+                    <span>View Details</span>
+                    <ChevronRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
+                  </button>
                 </div>
-              );
-            })}
-          </div>
-        )}
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Modal */}
+      {/* Modal Overlay */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedProject(null)}>
-          <div 
-            className="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden transform transition-all duration-300 scale-100 opacity-100 border border-slate-200" 
-            onClick={e => e.stopPropagation()}
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className={`h-2 w-full ${selectedProject.level === "Beginner" ? "bg-blue-500" : selectedProject.level === "Intermediate" ? "bg-orange-500" : "bg-purple-500"}`}></div>
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-6">
-                <h2 className="text-2xl font-black text-slate-900">{selectedProject.title}</h2>
-                <button onClick={() => setSelectedProject(null)} className="p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 rounded-xl transition-colors focus:outline-none">
-                  <X className="w-5 h-5" />
-                </button>
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 mb-4 pr-10">
+              <div className="p-3 bg-slate-800 rounded-xl border border-slate-700 text-emerald-400 flex-shrink-0">
+                <selectedProject.icon className="w-6 h-6" />
               </div>
-              
-              <div className="mb-6">
-                <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                  <Layers className="w-4 h-4" />
-                  Features to implement
-                </h3>
-                <ul className="space-y-4 pl-1">
-                  {selectedProject.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <div className="flex-shrink-0 mt-1.5 mr-3 h-2 w-2 rounded-full bg-slate-300"></div>
-                      <span className="text-slate-700 font-semibold leading-relaxed text-[15px]">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="mt-10 pt-6 border-t border-slate-100">
-                <button 
-                  onClick={() => setSelectedProject(null)}
-                  className="w-full bg-emerald-600 text-white rounded-xl py-3.5 font-bold text-[15px] hover:bg-emerald-700 transition-colors shadow-lg hover:shadow-emerald-600/30 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-                >
-                  Got it, let's build!
-                </button>
+              <h2 className="text-2xl font-bold text-white">{selectedProject.title}</h2>
+            </div>
+
+            <p className="text-slate-400 text-lg mb-6 leading-relaxed">
+              {selectedProject.description}
+            </p>
+
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Layers className="w-4 h-4" />
+                Tech Stack
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {selectedProject.tags.map((tag: string) => (
+                  <span key={tag} className="px-3 py-1 text-sm font-medium bg-slate-800 text-slate-300 rounded-lg border border-slate-700/50">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
+
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <CheckSquare className="w-4 h-4" />
+                Features to Build
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start text-slate-300">
+                  <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
+                  <span>Implement core functionality and setup the base architecture.</span>
+                </li>
+                <li className="flex items-start text-slate-300">
+                  <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
+                  <span>Integrate strictly requested technologies and state management.</span>
+                </li>
+                <li className="flex items-start text-slate-300">
+                  <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
+                  <span>Ensure a highly polished, responsive UI across all devices.</span>
+                </li>
+                <li className="flex items-start text-slate-300">
+                  <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
+                  <span>Add robust deployment configurations and optimize performance.</span>
+                </li>
+              </ul>
+            </div>
+
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl transition-colors"
+            >
+              Start Building Now
+            </button>
           </div>
         </div>
       )}
-      
-      <div className="mt-8">
-        <Footer />
+
+      {/* Footer Wrapper - explicitly coloring child elements to match dark theme if needed */}
+      <div className="border-t border-slate-800/50 bg-slate-950">
+        <div className="opacity-80">
+          <Footer />
+        </div>
       </div>
     </div>
   );
