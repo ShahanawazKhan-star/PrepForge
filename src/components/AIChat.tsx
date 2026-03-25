@@ -36,7 +36,6 @@ export const AIChat = () => {
     scrollToBottom();
   }, [messages, isTyping, isOpen]);
 
-  // Helper function to initialize or get the chat session
   const getChatSession = () => {
     if (chatSessionRef.current) return chatSessionRef.current;
 
@@ -52,11 +51,9 @@ export const AIChat = () => {
         model: 'gemini-1.5-flash',
       });
 
-      // Start session with proper system instruction in the first message if needed, 
-      // but Gemini 1.5 Flash supports systemInstruction in getGenerativeModel too.
       chatSessionRef.current = model.startChat({
         history: [],
-        generationConfig: { maxOutputTokens: 500 }
+        generationConfig: { maxOutputTokens: 800 }
       });
       return chatSessionRef.current;
     } catch (error) {
@@ -69,7 +66,7 @@ export const AIChat = () => {
     e.preventDefault();
     if (!input.trim() || isTyping) return;
 
-    const userText = input;
+    const userText = input.trim();
     const userMsg: Message = {
       id: Date.now().toString(),
       role: 'user',
@@ -88,13 +85,10 @@ export const AIChat = () => {
     }
 
     try {
-      // Adding a system prompt prefix to guide the AI every time if needed, 
-      // or just trust the model init.
       const prompt = `Context: You are PrepForge AI Mentor. Help with Full Stack/DSA. Hints only, no direct code unless asked twice. User says: ${userText}`;
-
+      
       const result = await session.sendMessage(prompt);
-      const response = await result.response;
-      const aiText = response.text();
+      const aiText = result.response.text();
 
       setMessages(prev => [
         ...prev,
@@ -106,7 +100,6 @@ export const AIChat = () => {
       ]);
     } catch (error: any) {
       console.error("Gemini API Error:", error);
-      // Clear session so it retries fresh next time
       chatSessionRef.current = null;
       toast.error("Connection failed. Try again!");
     } finally {
@@ -152,8 +145,7 @@ export const AIChat = () => {
               <div className="flex-1 overflow-y-auto p-4 bg-slate-900/50 space-y-4">
                 {messages.map((msg) => (
                   <div key={msg.id} className={`flex ${msg.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
-                    <div className={`px-4 py-2.5 text-[14px] rounded-2xl ${msg.role === 'ai' ? 'bg-slate-800 text-slate-200' : 'bg-emerald-600 text-white'
-                      }`}>
+                    <div className={`px-4 py-2.5 text-[14px] rounded-2xl whitespace-pre-wrap ${msg.role === 'ai' ? 'bg-slate-800 text-slate-200' : 'bg-emerald-600 text-white'}`}>
                       {msg.text}
                     </div>
                   </div>

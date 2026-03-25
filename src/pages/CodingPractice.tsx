@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import { useUser } from '../context/UserContext';
 import { supabase } from '../lib/supabase';
 import { toast } from 'react-hot-toast';
+import PomodoroTimer from '../components/PomodoroTimer';
 
 type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
@@ -164,6 +165,11 @@ const CodingPractice = () => {
       </div>
 
       <div className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10">
+
+        {/* Timer Section */}
+        <div className="mb-10">
+          <PomodoroTimer />
+        </div>
 
         {/* Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
