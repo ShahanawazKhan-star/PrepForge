@@ -3,6 +3,7 @@ import { Trophy, RefreshCw, Gamepad2 } from 'lucide-react';
 
 const RunnerGame: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const requestRef = useRef<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [score, setScore] = useState(0);
@@ -19,7 +20,6 @@ const RunnerGame: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationId: number;
     let frames = 0;
 
     // Game State Objects
@@ -85,7 +85,7 @@ const RunnerGame: React.FC = () => {
       ctx.stroke();
     };
 
-    const update = () => {
+    const gameLoop = () => {
       if (!isPlaying || isGameOver) {
         // Draw static scene if stopped
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -157,7 +157,7 @@ const RunnerGame: React.FC = () => {
       drawObstacles();
 
       frames++;
-      animationId = requestAnimationFrame(update);
+      requestRef.current = requestAnimationFrame(gameLoop);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -176,16 +176,16 @@ const RunnerGame: React.FC = () => {
         // Force reset variables on brand new game start
         resetGameVariables();
       }
-      update();
+      gameLoop();
     } else {
       // Draw initial or frozen state
-      update();
+      gameLoop();
     }
 
     // Cleanup phase
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      cancelAnimationFrame(animationId);
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, [isPlaying, isGameOver]);
 
