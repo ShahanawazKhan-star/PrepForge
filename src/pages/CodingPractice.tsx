@@ -54,11 +54,14 @@ const CodingPractice = () => {
           .select('problem_id')
           .eq('user_id', user.id);
 
-        if (error) throw error;
+        if (error) {
+          console.error("Fetch operation failed:", error);
+          throw error;
+        }
 
-        // Defensive check to always ensure it's a valid array
-        if (Array.isArray(data)) {
-          setSolvedIds(data.map(row => row.problem_id));
+        // Enforce strict numeric type in case Supabase returns a string or BIGINT
+        if (data) {
+          setSolvedIds(data.map(row => Number(row.problem_id)));
         } else {
           setSolvedIds([]);
         }
@@ -109,13 +112,19 @@ const CodingPractice = () => {
           .delete()
           .match({ user_id: user.id, problem_id: id });
 
-        if (error) throw error;
+        if (error) {
+          console.error("Save operation failed (Delete):", error);
+          throw error;
+        }
       } else {
         const { error } = await supabase
           .from('solved_problems')
           .insert({ user_id: user.id, problem_id: id });
 
-        if (error) throw error;
+        if (error) {
+          console.error("Save operation failed (Insert). Check RLS policies:", error);
+          throw error;
+        }
       }
     } catch (err: any) {
       console.error("Database Error:", err.message);
@@ -135,7 +144,7 @@ const CodingPractice = () => {
     <div className="min-h-screen flex flex-col bg-slate-50 font-sans">
 
       {/* Premium Header */}
-      <div className="bg-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+      <div className="bg-white text-slate-900 py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
@@ -143,21 +152,21 @@ const CodingPractice = () => {
                 <div className="p-2 bg-emerald-500/20 rounded-lg border border-emerald-500/30">
                   <TerminalSquare className="w-6 h-6 text-emerald-400" />
                 </div>
-                <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-white">Premium Practice</h1>
+                <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">Premium Practice</h1>
               </div>
-              <p className="text-slate-400 max-w-2xl text-[15px] font-medium leading-relaxed">
+              <p className="text-slate-600 max-w-2xl text-[15px] font-medium leading-relaxed">
                 Master the most frequently asked interview questions from top tech companies. Track your progress, benchmark against optimal solutions, and forge your coding skills.
               </p>
             </div>
 
-            <div className="flex items-center gap-4 bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50 backdrop-blur-sm shadow-inner">
-              <div className="text-center px-4 border-r border-slate-700">
-                <span className="block text-2xl font-black text-white tracking-tighter">{solvedIds.length}<span className="text-sm text-slate-400 font-bold ml-0.5">/{problems.length}</span></span>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">Solved</span>
+            <div className="flex items-center gap-4 bg-slate-100 p-4 rounded-2xl border border-slate-300/50 backdrop-blur-sm shadow-inner">
+              <div className="text-center px-4 border-r border-slate-300">
+                <span className="block text-2xl font-black text-slate-900 tracking-tighter">{solvedIds.length}<span className="text-sm text-slate-600 font-bold ml-0.5">/{problems.length}</span></span>
+                <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mt-0.5 block">Solved</span>
               </div>
               <div className="text-center px-4">
                 <span className="block text-2xl font-black text-emerald-400 tracking-tighter">1</span>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">Day Streak</span>
+                <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest mt-0.5 block">Day Streak</span>
               </div>
             </div>
           </div>
@@ -174,7 +183,7 @@ const CodingPractice = () => {
         {/* Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-slate-400" />
+            <Filter className="w-5 h-5 text-slate-600" />
             <h3 className="font-bold text-slate-700 text-[15px]">Filter by Difficulty:</h3>
           </div>
           <div className="flex bg-white rounded-xl shadow-sm border border-slate-200 p-1">
@@ -183,7 +192,7 @@ const CodingPractice = () => {
                 key={diff}
                 onClick={() => setFilter(diff as Difficulty | 'All')}
                 className={`px-4 py-1.5 rounded-lg text-[13px] font-bold transition-all ${filter === diff
-                  ? 'bg-slate-900 text-white shadow-sm'
+                  ? 'bg-white text-slate-900 shadow-sm'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
               >
@@ -195,7 +204,7 @@ const CodingPractice = () => {
 
         {/* Problem List */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-          <div className="grid grid-cols-12 gap-4 p-4 border-b border-slate-100 bg-slate-50/80 text-[12px] font-bold tracking-wider text-slate-500 uppercase">
+          <div className="grid grid-cols-12 gap-4 p-4 border-b border-slate-100 bg-slate-50/80 text-[12px] font-bold tracking-wider text-slate-9000 uppercase">
             <div className="col-span-2 sm:col-span-1 text-center">Status</div>
             <div className="col-span-10 sm:col-span-6 md:col-span-6">Title</div>
             <div className="col-span-2 hidden sm:block text-center">Difficulty</div>
@@ -225,7 +234,7 @@ const CodingPractice = () => {
                   {/* Title and Mobile Difficulty */}
                   <div className="col-span-10 sm:col-span-6 md:col-span-6 flex flex-col items-start pr-2">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className={`text-[14px] font-bold transition-colors ${isSolved ? 'text-slate-500 line-through decoration-slate-300' : 'text-slate-900 group-hover:text-emerald-600'
+                      <span className={`text-[14px] font-bold transition-colors ${isSolved ? 'text-slate-9000 line-through decoration-slate-300' : 'text-slate-900 group-hover:text-emerald-600'
                         }`}>
                         {problem.id}. {problem.title}
                       </span>
@@ -237,7 +246,7 @@ const CodingPractice = () => {
                         {problem.difficulty}
                       </span>
                     </div>
-                    <span className={`text-[13px] font-medium mt-1 line-clamp-1 ${isSolved ? 'text-slate-400' : 'text-slate-500'}`}>
+                    <span className={`text-[13px] font-medium mt-1 line-clamp-1 ${isSolved ? 'text-slate-600' : 'text-slate-9000'}`}>
                       {problem.category}
                     </span>
                   </div>
@@ -253,13 +262,13 @@ const CodingPractice = () => {
                   </div>
 
                   {/* Acceptance (Hidden on smaller screens) */}
-                  <div className={`col-span-2 hidden md:flex justify-center items-center text-[13px] font-semibold ${isSolved ? 'text-slate-400' : 'text-slate-600'}`}>
+                  <div className={`col-span-2 hidden md:flex justify-center items-center text-[13px] font-semibold ${isSolved ? 'text-slate-600' : 'text-slate-600'}`}>
                     {problem.acceptance}
                   </div>
 
                   {/* Action button */}
                   <div className="col-span-2 sm:col-span-3 md:col-span-1 flex justify-end items-center pr-2 md:pr-4 ml-auto">
-                    <button className="text-slate-400 hover:text-emerald-600 transition-colors sm:opacity-0 group-hover:opacity-100 focus:opacity-100 flex items-center gap-1.5 p-1">
+                    <button className="text-slate-600 hover:text-emerald-600 transition-colors sm:opacity-0 group-hover:opacity-100 focus:opacity-100 flex items-center gap-1.5 p-1">
                       <span className="text-[13px] font-bold hidden sm:block">Solve</span>
                       <Play className="w-4 h-4 fill-current" />
                     </button>
@@ -271,8 +280,8 @@ const CodingPractice = () => {
 
           {/* Empty State */}
           {filteredProblems.length === 0 && (
-            <div className="p-16 text-center text-slate-500 flex flex-col items-center bg-slate-50/50">
-              <AlertCircle className="w-10 h-10 text-slate-300 mb-3" />
+            <div className="p-16 text-center text-slate-9000 flex flex-col items-center bg-slate-50/50">
+              <AlertCircle className="w-10 h-10 text-slate-600 mb-3" />
               <p className="text-[14px] font-semibold text-slate-600">No problems found for this difficulty.</p>
             </div>
           )}

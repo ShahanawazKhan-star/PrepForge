@@ -118,16 +118,16 @@ export const AIChat = () => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="w-full h-full bg-slate-950 rounded-2xl shadow-2xl border border-slate-800 flex flex-col overflow-hidden ring-1 ring-white/10"
+              className="w-full h-full bg-slate-50 rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden ring-1 ring-white/10"
             >
               {/* Header */}
-              <div className="bg-slate-900 border-b border-slate-800 px-4 py-4 flex justify-between items-center shrink-0">
+              <div className="bg-white border-b border-slate-200 px-4 py-4 flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-3">
                   <div className="bg-emerald-500/10 p-2 rounded-xl border border-emerald-500/20 shadow-inner">
                     <Bot className="w-5 h-5 text-emerald-400" />
                   </div>
                   <div>
-                    <h3 className="font-extrabold text-[15px] tracking-tight text-white leading-none">AI Mentor</h3>
+                    <h3 className="font-extrabold text-[15px] tracking-tight text-slate-900 leading-none">AI Mentor</h3>
                     <div className="flex items-center gap-1.5 mt-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 relative flex items-center justify-center">
                         <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
@@ -136,23 +136,23 @@ export const AIChat = () => {
                     </div>
                   </div>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white p-2">
+                <button onClick={() => setIsOpen(false)} className="text-slate-600 hover:text-slate-900 p-2">
                   <X className="w-4 h-4" />
                 </button>
               </div>
 
               {/* Chat Area */}
-              <div className="flex-1 overflow-y-auto p-4 bg-slate-900/50 space-y-4">
+              <div className="flex-1 overflow-y-auto p-4 bg-white/80 space-y-4">
                 {messages.map((msg) => (
                   <div key={msg.id} className={`flex ${msg.role === 'ai' ? 'justify-start' : 'justify-end'}`}>
-                    <div className={`px-4 py-2.5 text-[14px] rounded-2xl whitespace-pre-wrap ${msg.role === 'ai' ? 'bg-slate-800 text-slate-200' : 'bg-emerald-600 text-white'}`}>
+                    <div className={`px-4 py-2.5 text-[14px] rounded-2xl whitespace-pre-wrap ${msg.role === 'ai' ? 'bg-slate-100 text-slate-800' : 'bg-emerald-600 text-white'}`}>
                       {msg.text}
                     </div>
                   </div>
                 ))}
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="bg-slate-800 rounded-2xl px-4 py-3 text-emerald-400 text-xs animate-pulse">
+                    <div className="bg-slate-100 rounded-2xl px-4 py-3 text-emerald-400 text-xs animate-pulse">
                       Mentor is thinking...
                     </div>
                   </div>
@@ -161,14 +161,14 @@ export const AIChat = () => {
               </div>
 
               {/* Input Area */}
-              <div className="p-3 bg-slate-900 border-t border-slate-800">
+              <div className="p-3 bg-white border-t border-slate-200">
                 <form onSubmit={handleSend} className="relative flex items-center">
                   <input
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Ask anything..."
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:ring-1 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-slate-900 text-sm focus:ring-1 focus:ring-emerald-500 outline-none"
                   />
                   <button type="submit" disabled={!input.trim() || isTyping} className="absolute right-2 p-2 text-emerald-500">
                     <Send className="w-4 h-4" />
@@ -182,7 +182,7 @@ export const AIChat = () => {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-4 sm:right-6 bg-slate-900 border border-emerald-500/30 text-white p-4 rounded-full z-[90]"
+        className="fixed bottom-6 right-4 sm:right-6 bg-white border border-emerald-500/30 text-slate-900 p-4 rounded-full z-[90]"
       >
         {isOpen ? <X /> : <Sparkles className="text-emerald-400" />}
       </button>

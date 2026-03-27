@@ -23,7 +23,7 @@ interface Project {
   id: string;
   title: string;
   description: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   tags: string[];
   icon: React.ElementType;
 }
@@ -33,7 +33,7 @@ const projects: Project[] = [
     id: 'endless-runner',
     title: 'Endless Runner Game',
     description: 'Build a 3D endless runner game with procedural generation and obstacle avoidance mechanics.',
-    difficulty: 'Hard',
+    difficulty: 'Advanced',
     tags: ['Unity', 'C#', '3D Math'],
     icon: Terminal
   },
@@ -41,7 +41,7 @@ const projects: Project[] = [
     id: 'ecommerce-api',
     title: 'E-commerce API',
     description: 'Develop a robust RESTful API for an online store with authentication and state management.',
-    difficulty: 'Medium',
+    difficulty: 'Intermediate',
     tags: ['Node.js', 'Express', 'MongoDB'],
     icon: ShoppingCart
   },
@@ -49,7 +49,7 @@ const projects: Project[] = [
     id: 'weather-dashboard',
     title: 'Weather Dashboard',
     description: 'Create a dynamic weather app that fetches atmospheric data from external APIs.',
-    difficulty: 'Easy',
+    difficulty: 'Beginner',
     tags: ['React', 'Tailwind', 'REST API'],
     icon: CloudSun
   },
@@ -57,7 +57,7 @@ const projects: Project[] = [
     id: 'portfolio-site',
     title: 'Portfolio Website',
     description: 'Design a responsive personal portfolio to showcase your skills, resume, and contact info.',
-    difficulty: 'Easy',
+    difficulty: 'Beginner',
     tags: ['HTML5', 'CSS3', 'JavaScript'],
     icon: Layout
   },
@@ -65,7 +65,7 @@ const projects: Project[] = [
     id: 'banking-api',
     title: 'Spring Boot Banking API',
     description: 'A secure financial transaction API featuring JWT auth, role-based access, and money transfers.',
-    difficulty: 'Hard',
+    difficulty: 'Advanced',
     tags: ['Java', 'Spring Boot', 'PostgreSQL'],
     icon: Landmark
   },
@@ -73,7 +73,7 @@ const projects: Project[] = [
     id: 'inventory-system',
     title: 'Java Inventory System',
     description: 'Manage warehouse stock, track orders, and generate reports using a robust Java backend.',
-    difficulty: 'Medium',
+    difficulty: 'Intermediate',
     tags: ['Java', 'Spring MVC', 'MySQL'],
     icon: Package
   },
@@ -81,7 +81,7 @@ const projects: Project[] = [
     id: 'react-dashboard',
     title: 'Analytics Dashboard',
     description: 'Build a complex admin dashboard featuring real-time data visualization and interactive widgets.',
-    difficulty: 'Hard',
+    difficulty: 'Advanced',
     tags: ['React', 'Recharts', 'Tailwind'],
     icon: LineChart
   },
@@ -89,7 +89,7 @@ const projects: Project[] = [
     id: '2d-platformer',
     title: '2D Pixel Platformer',
     description: 'Create a retro-style platform game with physics, enemy AI, and parallax scrolling.',
-    difficulty: 'Medium',
+    difficulty: 'Intermediate',
     tags: ['Godot', 'GDScript', 'Pixel Art'],
     icon: Gamepad2
   },
@@ -97,7 +97,7 @@ const projects: Project[] = [
     id: 'real-time-chat',
     title: 'Real-Time Chat App',
     description: 'Develop a full-stack chat application with live messaging, typing indicators, and online status.',
-    difficulty: 'Medium',
+    difficulty: 'Intermediate',
     tags: ['React', 'Firebase', 'Socket.io'],
     icon: MessageSquare
   },
@@ -105,7 +105,7 @@ const projects: Project[] = [
     id: 'ai-image-ui',
     title: 'AI Image Generator UI',
     description: 'Design a sleek, futuristic interface connecting to OpenAI\'s DALL-E to generate custom images.',
-    difficulty: 'Hard',
+    difficulty: 'Advanced',
     tags: ['Next.js', 'OpenAI API', 'Tailwind'],
     icon: Sparkles
   },
@@ -113,7 +113,7 @@ const projects: Project[] = [
     id: 'task-board',
     title: 'Kanban Task Board',
     description: 'Implement a drag-and-drop task management board perfect for tracking team productivity.',
-    difficulty: 'Medium',
+    difficulty: 'Intermediate',
     tags: ['React', 'Zustand', 'DnD'],
     icon: CheckSquare
   },
@@ -121,7 +121,7 @@ const projects: Project[] = [
     id: 'markdown-blog',
     title: 'Markdown Developer Blog',
     description: 'A lightning-fast static blog platform where posts are written purely in markdown files.',
-    difficulty: 'Easy',
+    difficulty: 'Beginner',
     tags: ['React', 'MDX', 'Tailwind'],
     icon: FileText
   }
@@ -130,28 +130,37 @@ const projects: Project[] = [
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const getDifficultyColor = (level: string) => {
+  const getDifficultyPill = (level: string) => {
     switch (level) {
-      case 'Easy': return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20';
-      case 'Medium': return 'text-amber-400 bg-amber-400/10 border-amber-400/20';
-      case 'Hard': return 'text-rose-400 bg-rose-400/10 border-rose-400/20';
-      default: return 'text-slate-400 bg-slate-400/10 border-slate-400/20';
+      case 'Beginner': return 'text-blue-700 bg-blue-50 border-blue-200';
+      case 'Intermediate': return 'text-orange-700 bg-orange-50 border-orange-200';
+      case 'Advanced': return 'text-purple-700 bg-purple-50 border-purple-200';
+      default: return 'text-slate-600 bg-slate-50 border-slate-200';
+    }
+  };
+
+  const getCardTopBorder = (level: string) => {
+    switch (level) {
+      case 'Beginner': return 'border-t-[5px] border-t-blue-500';
+      case 'Intermediate': return 'border-t-[5px] border-t-orange-500';
+      case 'Advanced': return 'border-t-[5px] border-t-purple-500';
+      default: return 'border-t-[5px] border-t-slate-500';
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 flex flex-col pt-16 font-sans antialiased selection:bg-emerald-500/30">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col pt-16 font-sans antialiased selection:bg-emerald-500/30">
       <div className="flex-grow max-w-7xl mx-auto px-6 py-16 w-full">
         {/* Header Section */}
         <div className="mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 text-sm font-bold mb-6">
             <Code2 className="w-4 h-4" />
             <span>Project Library</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
             Available Projects
           </h1>
-          <p className="text-slate-400 text-lg max-w-2xl leading-relaxed">
+          <p className="text-slate-600 text-lg max-w-2xl leading-relaxed font-medium">
             Select a project and begin your development journey. Each project is engineered to bridge the gap between theory and technical mastery.
           </p>
         </div>
@@ -164,32 +173,29 @@ export default function Projects() {
             return (
               <div
                 key={project.id}
-                className="group relative bg-slate-900 overflow-hidden rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.15)] flex flex-col"
+                className={`group relative bg-white overflow-hidden rounded-2xl border-x border-b border-slate-200 ${getCardTopBorder(project.difficulty)} hover:shadow-lg transition-shadow duration-300 flex flex-col`}
               >
-                {/* Subtle Background Glow */}
-                <div className="absolute top-0 right-0 p-32 bg-emerald-500/5 rounded-full blur-[100px] -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
                 <div className="p-8 flex flex-col flex-grow relative z-10">
                   <div className="flex justify-between items-start mb-6">
-                    <div className="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 text-slate-300 group-hover:text-emerald-400 group-hover:bg-emerald-500/10 transition-colors duration-300">
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-slate-500 group-hover:text-emerald-600 group-hover:bg-emerald-50 transition-colors duration-300 shadow-sm">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className={`px-3 py-1 text-xs font-semibold rounded-full border ${getDifficultyColor(project.difficulty)}`}>
+                    <span className={`px-3 py-1 text-xs font-bold rounded-full border ${getDifficultyPill(project.difficulty)}`}>
                       {project.difficulty.toUpperCase()}
                     </span>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-slate-100 mb-3 group-hover:text-white transition-colors">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">
                     {project.title}
                   </h3>
 
-                  <p className="text-slate-400 leading-relaxed mb-8 flex-grow">
+                  <p className="text-slate-600 leading-relaxed mb-8 flex-grow font-medium">
                     {project.description}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-8">
                     {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 text-xs font-medium bg-slate-800 text-slate-300 rounded-lg border border-slate-700/50">
+                      <span key={tag} className="px-3 py-1 text-xs font-bold bg-slate-100 text-slate-600 rounded-lg border border-slate-200">
                         {tag}
                       </span>
                     ))}
@@ -197,7 +203,7 @@ export default function Projects() {
 
                   <button
                     onClick={() => setSelectedProject(project)}
-                    className="flex items-center justify-between w-full py-3 px-4 bg-slate-800 hover:bg-emerald-500 text-slate-300 hover:text-slate-950 font-semibold rounded-xl transition-all duration-300 group/btn border border-slate-700 hover:border-transparent"
+                    className="flex items-center justify-between w-full py-3 px-4 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-bold rounded-xl transition-all duration-300 group/btn border border-slate-200 hover:border-emerald-200 shadow-sm"
                   >
                     <span>View Details</span>
                     <ChevronRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
@@ -212,39 +218,39 @@ export default function Projects() {
       {/* Modal Overlay */}
       {selectedProject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative"
+            className="bg-white border border-slate-200 rounded-2xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedProject(null)}
-              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors border border-transparent hover:border-slate-200"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4 pr-10">
-              <div className="p-3 bg-slate-800 rounded-xl border border-slate-700 text-emerald-400 flex-shrink-0">
+              <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-emerald-600 flex-shrink-0 shadow-sm">
                 <selectedProject.icon className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-white">{selectedProject.title}</h2>
+              <h2 className="text-2xl font-bold text-slate-900">{selectedProject.title}</h2>
             </div>
 
-            <p className="text-slate-400 text-lg mb-6 leading-relaxed">
+            <p className="text-slate-600 text-lg mb-6 leading-relaxed font-medium">
               {selectedProject.description}
             </p>
 
             <div className="mb-8">
-              <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                <Layers className="w-4 h-4" />
+              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Layers className="w-4 h-4 text-emerald-500" />
                 Tech Stack
               </h3>
               <div className="flex flex-wrap gap-2">
                 {selectedProject.tags.map((tag: string) => (
-                  <span key={tag} className="px-3 py-1 text-sm font-medium bg-slate-800 text-slate-300 rounded-lg border border-slate-700/50">
+                  <span key={tag} className="px-3 py-1 text-sm font-bold bg-slate-100 text-slate-700 rounded-lg border border-slate-200">
                     {tag}
                   </span>
                 ))}
@@ -252,24 +258,24 @@ export default function Projects() {
             </div>
 
             <div className="mb-8">
-              <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                <CheckSquare className="w-4 h-4" />
+              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <CheckSquare className="w-4 h-4 text-emerald-500" />
                 Features to Build
               </h3>
               <ul className="space-y-3">
-                <li className="flex items-start text-slate-300">
+                <li className="flex items-start text-slate-600 font-medium">
                   <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
                   <span>Implement core functionality and setup the base architecture.</span>
                 </li>
-                <li className="flex items-start text-slate-300">
+                <li className="flex items-start text-slate-600 font-medium">
                   <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
                   <span>Integrate strictly requested technologies and state management.</span>
                 </li>
-                <li className="flex items-start text-slate-300">
+                <li className="flex items-start text-slate-600 font-medium">
                   <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
                   <span>Ensure a highly polished, responsive UI across all devices.</span>
                 </li>
-                <li className="flex items-start text-slate-300">
+                <li className="flex items-start text-slate-600 font-medium">
                   <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 mr-3"></div>
                   <span>Add robust deployment configurations and optimize performance.</span>
                 </li>
@@ -278,7 +284,7 @@ export default function Projects() {
 
             <button
               onClick={() => setSelectedProject(null)}
-              className="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl transition-colors"
+              className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg translate-y-0 hover:-translate-y-0.5"
             >
               Start Building Now
             </button>
@@ -286,11 +292,9 @@ export default function Projects() {
         </div>
       )}
 
-      {/* Footer Wrapper - explicitly coloring child elements to match dark theme if needed */}
-      <div className="border-t border-slate-800/50 bg-slate-950">
-        <div className="opacity-80">
-          <Footer />
-        </div>
+      {/* Footer Wrapper */}
+      <div className="border-t border-slate-200 bg-white">
+        <Footer />
       </div>
     </div>
   );

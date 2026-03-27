@@ -10,12 +10,12 @@ const Jobs = () => {
           <Briefcase className="w-10 h-10 text-green-600" />
         </div>
         <h1 className="text-4xl font-extrabold mb-4 tracking-tight">Job Section</h1>
-        <p className="text-lg text-slate-500 mb-10 leading-relaxed">
+        <p className="text-lg text-slate-9000 mb-10 leading-relaxed">
           Connecting you with top tech companies and exclusive job opportunities soon.
         </p>
         <button 
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all shadow-xl hover:shadow-slate-200 mx-auto"
+          className="flex items-center gap-2 px-8 py-4 bg-white text-slate-900 rounded-2xl font-bold text-lg hover:bg-slate-100 transition-all shadow-xl hover:shadow-slate-200 mx-auto"
         >
           <ArrowLeft className="w-5 h-5" /> Back to Home
         </button>

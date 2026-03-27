@@ -143,14 +143,14 @@ const AuthToast = ({ show, onClose, onLogin }: ToastProps) => (
               <AlertCircle className="w-3.5 h-3.5 text-rose-500 inline" />
               Login Required
             </p>
-            <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+            <p className="text-xs text-slate-9000 mt-0.5 leading-relaxed">
               Please log in to access this feature. It's free and takes only a moment!
             </p>
             {/* Actions */}
             <div className="flex items-center gap-2 mt-3">
               <button
                 onClick={onLogin}
-                className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-gradient-to-r from-green-600 to-green-700 text-white text-xs font-bold hover:opacity-90 transition shadow"
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-gradient-to-r from-green-600 to-green-700 text-slate-900 text-xs font-bold hover:opacity-90 transition shadow"
               >
                 <LogIn className="w-3 h-3" /> Sign In Now
               </button>
@@ -166,7 +166,7 @@ const AuthToast = ({ show, onClose, onLogin }: ToastProps) => (
           {/* Close */}
           <button
             onClick={onClose}
-            className="text-slate-300 hover:text-slate-500 transition flex-shrink-0 mt-0.5"
+            className="text-slate-600 hover:text-slate-9000 transition flex-shrink-0 mt-0.5"
           >
             <X className="w-4 h-4" />
           </button>
@@ -252,7 +252,7 @@ export const Explore = () => {
             {/* Back link */}
             <button
               onClick={() => navigate('/')}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-green-600 transition mb-8"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-9000 hover:text-green-600 transition mb-8"
             >
               <ChevronLeft className="w-4 h-4" /> Back to Home
             </button>
@@ -333,7 +333,7 @@ export const Explore = () => {
 
                 {/* Lock badge for unauthenticated */}
                 {!isAuthenticated && (
-                  <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100 text-slate-400 text-[10px] font-bold border border-slate-200">
+                  <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold border border-slate-200">
                     <Lock className="w-2.5 h-2.5" /> Login to unlock
                   </div>
                 )}
@@ -346,12 +346,12 @@ export const Explore = () => {
 
                   {/* Text */}
                   <h2 className="text-xl font-bold text-slate-900 mb-2">{f.title}</h2>
-                  <p className="text-slate-500 text-sm leading-relaxed flex-1">{f.description}</p>
+                  <p className="text-slate-9000 text-sm leading-relaxed flex-1">{f.description}</p>
 
                   {/* CTA */}
                   <button
                     onClick={() => handleFeatureClick(f.path)}
-                    className={`mt-6 w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r ${f.gradient} text-white text-sm font-bold shadow hover:shadow-lg hover:opacity-90 transition-all group/btn`}
+                    className={`mt-6 w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r ${f.gradient} text-slate-900 text-sm font-bold shadow hover:shadow-lg hover:opacity-90 transition-all group/btn`}
                   >
                     {!isAuthenticated && <Lock className="w-3.5 h-3.5 opacity-80" />}
                     {f.cta}
@@ -369,10 +369,10 @@ export const Explore = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-16 text-center"
           >
-            <p className="text-slate-500 text-sm mb-4">Ready to track your progress?</p>
+            <p className="text-slate-9000 text-sm mb-4">Ready to track your progress?</p>
             <button
               onClick={handleDashboardClick}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-white text-slate-900 font-semibold hover:bg-slate-100 hover:shadow-lg hover:-translate-y-0.5 transition-all"
             >
               Go to Dashboard <ArrowRight className="w-4 h-4" />
             </button>

@@ -27,22 +27,22 @@ const RoadmapDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans flex flex-col">
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col">
       {/* Header */}
-      <div className="bg-slate-900 border-b border-emerald-900/30 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+      <div className="bg-white border-b border-emerald-200 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <Link to="/roadmaps" className="inline-flex items-center gap-2 text-emerald-500 hover:text-emerald-400 font-bold text-[13px] mb-6 transition-colors tracking-wide uppercase">
             <ArrowLeft className="w-4 h-4" /> Back to Pathways
           </Link>
           <motion.h1 
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4"
+            className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-4"
           >
             {roadmap.title}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="text-lg text-slate-400 max-w-2xl leading-relaxed font-medium"
+            className="text-lg text-slate-600 max-w-2xl leading-relaxed font-medium"
           >
             {roadmap.description}
           </motion.p>
@@ -65,11 +65,11 @@ const RoadmapDetail = () => {
               className="relative mb-16 last:mb-0"
             >
               {/* Timeline Node Circle */}
-              <div className="absolute -left-[30px] md:-left-[38px] w-7 h-7 bg-slate-950 border-4 border-emerald-500 rounded-full mt-1.5 z-10 shadow-[0_0_15px_rgba(16,185,129,0.3)]"></div>
+              <div className="absolute -left-[30px] md:-left-[38px] w-7 h-7 bg-slate-50 border-4 border-emerald-500 rounded-full mt-1.5 z-10 shadow-[0_0_15px_rgba(16,185,129,0.3)]"></div>
 
-              <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-8 hover:border-emerald-500/20 transition-all shadow-2xl">
+              <div className="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-6 md:p-8 hover:border-emerald-500/20 transition-all shadow-2xl">
                 <div className="flex items-center gap-3 mb-6">
-                  <h2 className="text-2xl font-black text-white tracking-tight">{level.name} Phase</h2>
+                  <h2 className="text-2xl font-black text-slate-900 tracking-tight">{level.name} Phase</h2>
                   {levelIdx === 0 && (
                     <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-black rounded-full uppercase tracking-wider border border-emerald-500/20">Start Here</span>
                   )}
@@ -81,23 +81,23 @@ const RoadmapDetail = () => {
                     const isCompleted = completedSteps.includes(stepId);
                     
                     return (
-                      <div key={topicIdx} className={`rounded-2xl border p-5 md:p-6 transition-all duration-300 ${isCompleted ? 'bg-emerald-900/10 border-emerald-500/30 shadow-[inset_0_0_20px_rgba(16,185,129,0.05)]' : 'bg-slate-950/50 border-slate-800 hover:border-slate-700'}`}>
+                      <div key={topicIdx} className={`rounded-2xl border p-5 md:p-6 transition-all duration-300 ${isCompleted ? 'bg-emerald-50 border-emerald-500/30 shadow-[inset_0_0_20px_rgba(16,185,129,0.05)]' : 'bg-slate-50 border-slate-200 hover:border-slate-300'}`}>
                         <div className="flex flex-col md:flex-row md:items-start justify-between gap-5">
                           
                           <div className="flex-grow">
-                            <h3 className={`text-xl font-bold mb-3 transition-colors ${isCompleted ? 'text-slate-500 line-through decoration-slate-600' : 'text-slate-100'}`}>
+                            <h3 className={`text-xl font-bold mb-3 transition-colors ${isCompleted ? 'text-slate-9000 line-through decoration-slate-600' : 'text-slate-900'}`}>
                               {topic}
                             </h3>
                             <ul className={`space-y-2.5 mb-2 transition-opacity ${isCompleted ? 'opacity-40' : 'opacity-100'}`}>
-                              <li className="flex items-start gap-2.5 text-[15px] font-medium text-slate-400">
+                              <li className="flex items-start gap-2.5 text-[15px] font-medium text-slate-600">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/40 mt-2 flex-shrink-0"></span>
                                 Master the core fundamentals and architecture of this topic.
                               </li>
-                              <li className="flex items-start gap-2.5 text-[15px] font-medium text-slate-400">
+                              <li className="flex items-start gap-2.5 text-[15px] font-medium text-slate-600">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/40 mt-2 flex-shrink-0"></span>
                                 Build 2-3 practical components to solidify your knowledge.
                               </li>
-                              <li className="flex items-start gap-2.5 text-[15px] font-medium text-slate-400">
+                              <li className="flex items-start gap-2.5 text-[15px] font-medium text-slate-600">
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/40 mt-2 flex-shrink-0"></span>
                                 Review documentation and modern community best-practices.
                               </li>
@@ -117,7 +117,7 @@ const RoadmapDetail = () => {
                               {isCompleted ? 'Completed' : 'Mark Done'}
                             </button>
                             
-                            <a href="#" onClick={(e) => e.preventDefault()} className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 hover:text-white transition-all w-full md:w-40">
+                            <a href="#" onClick={(e) => e.preventDefault()} className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold bg-slate-100 text-slate-600 border border-slate-300 hover:bg-slate-700 hover:text-slate-900 transition-all w-full md:w-40">
                               <ExternalLink className="w-4 h-4" />
                               Resources
                             </a>
@@ -129,11 +129,11 @@ const RoadmapDetail = () => {
                 </div>
 
                 {level.projects.length > 0 && (
-                  <div className="mt-8 pt-6 border-t border-slate-800">
-                    <h4 className="text-[13px] font-black text-slate-500 uppercase tracking-widest mb-4">Milestone Projects</h4>
+                  <div className="mt-8 pt-6 border-t border-slate-200">
+                    <h4 className="text-[13px] font-black text-slate-9000 uppercase tracking-widest mb-4">Milestone Projects</h4>
                     <div className="flex flex-wrap gap-3">
                       {level.projects.map((proj, i) => (
-                        <span key={i} className="bg-slate-800/50 text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg text-sm font-bold shadow-sm">
+                        <span key={i} className="bg-slate-100 text-emerald-400 border border-emerald-500/20 px-4 py-2 rounded-lg text-sm font-bold shadow-sm">
                           {proj}
                         </span>
                       ))}
@@ -147,7 +147,7 @@ const RoadmapDetail = () => {
         </div>
       </div>
       
-      <div className="bg-slate-950">
+      <div className="bg-slate-50">
         <Footer />
       </div>
     </div>

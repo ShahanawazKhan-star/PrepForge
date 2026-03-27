@@ -6,6 +6,8 @@ import type { User } from '@supabase/supabase-js';
 interface UserContextType {
   user: User | null;
   completedSteps: string[];
+  totalSolvedCount: number;
+  currentStreak: number;
   toggleStep: (stepId: string) => Promise<void>;
   getRoadmapProgress: (roadmapId: string, totalSteps: number) => number;
   isLoadingProgress: boolean;
@@ -16,6 +18,8 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [completedSteps, setCompletedSteps] = useState<string[]>([]);
+  const [totalSolvedCount, setTotalSolvedCount] = useState<number>(0);
+  const [currentStreak, setCurrentStreak] = useState<number>(0);
   const [isLoadingProgress, setIsLoadingProgress] = useState(true);
 
   useEffect(() => {
@@ -24,8 +28,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchProgress(session.user.id);
+        fetchDsaProgress(session.user.id);
+        fetchUserStreak(session.user.id);
       } else {
         setCompletedSteps([]);
+        setTotalSolvedCount(0);
+        setCurrentStreak(0);
         setIsLoadingProgress(false);
       }
     });
@@ -35,8 +43,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchProgress(session.user.id);
+        fetchDsaProgress(session.user.id);
+        fetchUserStreak(session.user.id);
       } else {
         setCompletedSteps([]);
+        setTotalSolvedCount(0);
+        setCurrentStreak(0);
         setIsLoadingProgress(false);
       }
     });
@@ -62,6 +74,39 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       toast.error('Failed to load your progress.');
     } finally {
       setIsLoadingProgress(false);
+    }
+  };
+
+  const fetchDsaProgress = async (userId: string) => {
+    try {
+      const { count, error } = await supabase
+        .from('solved_problems')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', userId);
+        
+      if (error) throw error;
+      setTotalSolvedCount(count || 0);
+    } catch (error) {
+      console.error('Error fetching DSA progress:', error);
+    }
+  };
+
+  const fetchUserStreak = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('current_streak')
+        .eq('id', userId)
+        .single();
+        
+      if (error) {
+        console.error('Error fetching streak:', error);
+        setCurrentStreak(0);
+        return;
+      }
+      setCurrentStreak(data?.current_streak || 0);
+    } catch (error) {
+      console.error('Error in fetchUserStreak:', error);
     }
   };
 
@@ -139,7 +184,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <UserContext.Provider value={{ user, completedSteps, toggleStep, getRoadmapProgress, isLoadingProgress }}>
+    <UserContext.Provider value={{ user, completedSteps, totalSolvedCount, currentStreak, toggleStep, getRoadmapProgress, isLoadingProgress }}>
       {children}
     </UserContext.Provider>
   );
