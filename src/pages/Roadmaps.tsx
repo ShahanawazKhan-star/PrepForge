@@ -1,33 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { Code, Coffee, Server, Database, ArrowLeft, Map, Sparkles } from 'lucide-react';
+import { ArrowLeft, Map, Sparkles, ChevronRight } from 'lucide-react';
+import * as Icons from 'lucide-react';
 import Footer from '../components/Footer';
-
-const milestones = [
-  {
-    title: 'Frontend Basics',
-    description: 'Master the building blocks of the web including HTML5, modern CSS3 layouts, JavaScript ES6+, and component-driven architecture with React.',
-    tech: ['HTML', 'CSS', 'JS', 'React'],
-    icon: Code
-  },
-  {
-    title: 'Core Java & OOPs',
-    description: 'Dive deep into Java fundamentals, Object-Oriented Programming concepts, multithreading, collections framework, and JVM internals.',
-    tech: ['Java 17+', 'OOPs', 'Collections', 'Multithreading'],
-    icon: Coffee
-  },
-  {
-    title: 'Backend Frameworks',
-    description: 'Build robust APIs and enterprise applications using Spring Boot, handle data persistence with Hibernate/JPA, and implement RESTful services.',
-    tech: ['Spring Boot', 'Hibernate', 'JPA', 'REST APIs'],
-    icon: Server
-  },
-  {
-    title: 'Database & Deployment',
-    description: 'Design relational schemas, manage data with MySQL, containerize applications using Docker, and deploy scalable services via AWS.',
-    tech: ['MySQL', 'AWS', 'Docker', 'CI/CD'],
-    icon: Database
-  }
-];
+import { roadmaps } from '../data/roadmaps';
 
 export default function Roadmaps() {
   const navigate = useNavigate();
@@ -53,76 +28,54 @@ export default function Roadmaps() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-grow max-w-5xl mx-auto px-6 py-20 w-full relative">
-        <div className="text-center mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-6">
+      <div className="flex-grow max-w-7xl mx-auto px-6 py-16 w-full">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-sm font-semibold mb-6">
             <Sparkles className="w-4 h-4" />
-            <span>Mastery Track</span>
+            <span>Structured Learning Paths</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
-            Java Full Stack Developer
+            Choose Your Career Path
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            Follow this structured timeline to master enterprise Java development. From basic frontend interfaces to scalable backend microservices.
+            Follow our premium, expert-curated roadmaps to master your desired tech field. From beginner fundamentals to advanced real-world engineering.
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative border-l-2 border-emerald-500/20 pl-8 md:pl-0 md:border-l-0 pb-12">
-          {/* Desktop Center Line */}
-          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] bg-gradient-to-b from-emerald-500/0 via-emerald-500/40 to-emerald-500/0"></div>
-
-          {milestones.map((milestone, index) => {
-            const Icon = milestone.icon;
-            const isEven = index % 2 === 0;
-
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-20">
+          {roadmaps.map((roadmap) => {
+            const IconComponent = (Icons as any)[roadmap.icon] || Icons.Code;
+            
             return (
-              <div 
-                key={index} 
-                className={`relative flex flex-col md:flex-row items-center justify-between mb-16 md:mb-24 ${!isEven ? 'md:flex-row-reverse' : ''}`}
+              <div
+                key={roadmap.id}
+                onClick={() => navigate(`/roadmap/${roadmap.id}`)}
+                className="group relative bg-white border border-slate-200 rounded-3xl p-6 lg:p-8 cursor-pointer overflow-hidden hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)] hover:border-emerald-300 transition-all duration-300"
               >
-                {/* Mobile line dot overlay */}
-                <div className="md:hidden absolute -left-[41px] top-8 w-4 h-4 rounded-full bg-slate-50 border-2 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] z-10"></div>
+                {/* Background Grid Pattern (Subtle) */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:1rem_1rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 
-                {/* Desktop center icon */}
-                <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-white border border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)] items-center justify-center z-10 text-emerald-400 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="w-6 h-6" />
-                </div>
-
-                {/* Spacer for desktop layout (pushes card to correct side) */}
-                <div className="hidden md:block w-[45%]"></div>
-
-                {/* Content Card */}
-                <div className="w-full md:w-[45%]">
-                  <div className="bg-white overflow-hidden border border-slate-200 p-8 rounded-3xl hover:border-emerald-500/50 transition-all duration-300 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.2)] group relative">
-                    {/* Glowing Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                    <div className="relative z-10">
-                      <div className="md:hidden inline-flex p-3 bg-emerald-500/10 rounded-xl mb-5 text-emerald-400 border border-emerald-500/20">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      
-                      <div className="text-emerald-400 font-mono text-sm mb-3 font-bold tracking-widest uppercase flex items-center gap-3">
-                        Phase 0{index + 1}
-                        <div className="h-[1px] bg-emerald-500/30 flex-grow max-w-[50px]"></div>
-                      </div>
-                      
-                      <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-                        {milestone.title}
-                      </h3>
-                      
-                      <p className="text-slate-600 mb-8 leading-relaxed text-md md:text-lg">
-                        {milestone.description}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {milestone.tech.map(t => (
-                          <span key={t} className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-600 font-medium tracking-wide">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-600 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500 transition-colors duration-300 mb-6 shadow-sm">
+                    <IconComponent className="w-7 h-7" />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-700 transition-colors">
+                    {roadmap.title}
+                  </h3>
+                  
+                  <p className="text-slate-600 line-clamp-2 leading-relaxed mb-6 flex-grow">
+                    {roadmap.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
+                    <span className="text-sm font-semibold text-slate-500 group-hover:text-emerald-600 transition-colors flex items-center gap-1">
+                      {roadmap.levels.length} Levels
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
                     </div>
                   </div>
                 </div>
@@ -132,11 +85,8 @@ export default function Roadmaps() {
         </div>
       </div>
 
-      {/* Footer Wrapper - explicitly coloring child elements to match dark theme */}
       <div className="border-t border-slate-200/50 bg-slate-50 mt-auto">
-        <div className="opacity-80">
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </div>
   );

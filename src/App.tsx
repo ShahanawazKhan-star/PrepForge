@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import RoadmapDetail from './pages/RoadmapDetail';
 import { AIChat } from './components/AIChat';
 import RunnerGame from './pages/RunnerGame';
+import ProblemPage from './pages/ProblemPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/roadmap/:id" element={<RoadmapDetail />} />
           <Route path="/game" element={<RunnerGame />} />
+          <Route path="/problem/:id" element={<ProblemPage />} />
         </Routes>
         <AIChat />
       </div>
